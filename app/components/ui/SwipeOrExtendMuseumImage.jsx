@@ -7,13 +7,18 @@ import { useEffect, useState, useRef } from 'react';
 
 export default function SwipeOrFocusMuseumImage() {
   const [museums, setMuseums] = useState([]);
+  const [images, setImages] = useState(museums);
   const [showHint, setShowHint] = useState(true);
   const targetRef = useRef(null);
   const numberOfImages = museums.length;
 
   const handleSwipe = () => {
-    const updated = [...museums.slice(1), museums[0]];
-    setMuseums(updated);
+    setImages((prev) => {
+      if (prev.length === 0) return prev;
+      const [first, ...rest] = prev;
+      return [...rest, first];
+    });
+    setMuseums(images);
     setShowHint(false);
   };
 
@@ -65,7 +70,7 @@ export default function SwipeOrFocusMuseumImage() {
       <h2 className="text-center text-3xl sm:text-5xl mt-12">博物館</h2>
       <h3 className="text-center text-lg text-gray-600 mt-4 mb-12">画像をクリックすると詳細ページに遷移します</h3>
       <div className="xl:hidden relative w-full h-[300px] sm:h-[500px] flex justify-center items-center mb-8">
-        {museums
+        {images
           .filter(museum =>
             ["/images/exhibition-image/クジラの化石.png",
             "/images/exhibition-image/船と人類.jpg",
@@ -83,7 +88,7 @@ export default function SwipeOrFocusMuseumImage() {
                   <motion.div
                     className="absolute"
                     drag={front ? "x" : false}
-                    onDragEnd={(event, info) => {
+                    onDragEnd={(_, info) => {
                       if (front && (info.offset.x < -100 || info.offset.x > 100)) {
                         handleSwipe();
                       }
