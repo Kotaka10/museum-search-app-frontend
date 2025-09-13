@@ -8,10 +8,12 @@ import { useEffect, useState, useRef } from 'react';
 export default function SwipeOrFocusMuseumImage() {
   const [museums, setMuseums] = useState([]);
   const [images, setImages] = useState([]);
+  const [swipeDirection, setSwipeDirection] = useState(0);
   const [showHint, setShowHint] = useState(true);
   const targetRef = useRef(null);
 
-  const handleSwipe = () => {
+  const handleSwipe = (direction) => {
+    setSwipeDirection(direction);
     setImages((prev) => {
       if (prev.length === 0) return prev;
       const [first, ...rest] = prev;
@@ -83,17 +85,16 @@ export default function SwipeOrFocusMuseumImage() {
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={museum.id}
+                      key={museum.id + "-" + front}
                       className="absolute"
                       drag={front ? "x" : false}
                       onDragEnd={(_, info) => {
-                        if (front && Math.abs(info.offset.x) > 100) {
-                          handleSwipe();
-                        }
+                        if (front && info.offset.x > 100) handleSwipe(1);
+                        else if (front && info.offset.x < -100) handleSwipe(-1);
                       }}
                       initial={{ scale: 0.95, opacity: 0 }}
                       animate={{ scale, opacity: 1, x: offsetX }}
-                      exit={{ scale: 0.95, opacity: 0, x: front ? (info.offset?.x || 0) * 2 : 0 }}
+                      exit={{ scale: 0.95, opacity: 0, x: swipeDirection * 200 }}
                       transition={{ duration: 0.3 }}
                       style={{ zIndex: images.length - index }}
                     >
