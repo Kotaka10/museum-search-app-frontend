@@ -16,8 +16,14 @@ export default function SwipeOrFocusMuseumImage() {
     setSwipeDirection(direction);
     setImages((prev) => {
       if (prev.length === 0) return prev;
-      const [first, ...rest] = prev;
-      return [...rest, first];
+      if (direction > 0) {
+        const [first, ...rest] = prev;
+        return [...rest, first];
+      } else {
+        const last = prev[prev.length - 1];
+        const rest = prev.slice(0, prev.length - 1);
+        return [last, ...rest];
+      }
     });
     setShowHint(false);
   };
@@ -31,8 +37,15 @@ export default function SwipeOrFocusMuseumImage() {
         throw new Error('美術館の取得に失敗しました');
       }
       const data = await res.json();
-      setMuseums(data);
-      setImages(data);
+      const filtered = data.filter(museum =>
+        [
+          "/images/exhibition-image/クジラの化石.png",
+          "/images/exhibition-image/船と人類.jpg",
+          "/images/exhibition-image/昆虫展.png"
+        ].includes(museum.exhibitionImage)
+      );
+      setMuseums(filtered);
+      setImages(filtered);
     }
 
     fetchMuseums();
@@ -70,14 +83,7 @@ export default function SwipeOrFocusMuseumImage() {
       <h3 className="text-center text-lg text-gray-600 mt-4 mb-12">画像をクリックすると詳細ページに遷移します</h3>
       <div className="xl:hidden relative w-full h-[300px] sm:h-[500px] flex justify-center items-center mb-8">
         <AnimatePresence initial={false}>
-          {images
-            .filter(museum =>
-              ["/images/exhibition-image/クジラの化石.png",
-              "/images/exhibition-image/船と人類.jpg",
-              "/images/exhibition-image/昆虫展.png"
-              ].includes(museum.exhibitionImage)
-            )
-            .map((museum, index) => {
+          {images.slice(0, 3).map((museum, index) => {
               const front = index === 0;
               const offsetX = index * 20;
               const scale = 1 - index * 0.03;
@@ -85,18 +91,22 @@ export default function SwipeOrFocusMuseumImage() {
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={museum.id + "-" + front}
+                      key={museum.id}
                       className="absolute"
                       drag={front ? "x" : false}
-                      dragConstraints={{ left: 0, right: 0 }}
+                      dragConstraints={{ left: -200, right: 200 }}
                       onDragEnd={(_, info) => {
                         if (!front) return;
-                        if (front && info.offset.x > 100) handleSwipe(1);
-                        else if (front && info.offset.x < -100) handleSwipe(-1);
+                        if (front && info.offset.x > 60) handleSwipe(1);
+                        else if (front && info.offset.x < -60) handleSwipe(-1);
                       }}
                       initial={{ scale: 0.95, opacity: 0, x: offsetX }}
                       animate={{ scale, opacity: 1, x: offsetX }}
-                      exit={{ scale: 0.95, opacity: 0, x: swipeDirection * 200 }}
+                      exit={{
+                        x: swipeDirection > 0 ? 300 : -300,
+                        opacity: 0,
+                        scale: 0.95,
+                      }}
                       transition={{ duration: 0.3 }}
                       style={{ zIndex: images.length - index }}
                     >
@@ -140,15 +150,7 @@ export default function SwipeOrFocusMuseumImage() {
         </AnimatePresence>
       </div>
       <div className="hidden xl:flex p-4 relative overflow-visible mb-8">
-        {museums
-          .filter(museum =>
-            [
-              "/images/exhibition-image/クジラの化石.png",
-              "/images/exhibition-image/船と人類.jpg",
-              "/images/exhibition-image/昆虫展.png"
-            ].includes(museum.exhibitionImage)
-          )
-          .map((museum, i) => (
+        {museums.map((museum, i) => (
             <motion.div
               key={i}
               whileHover={{ scale: 1.1, zIndex: 10 }}
