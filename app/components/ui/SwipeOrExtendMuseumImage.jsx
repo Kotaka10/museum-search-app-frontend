@@ -94,7 +94,7 @@ export default function SwipeOrFocusMuseumImage() {
                       }}
                       initial={{ scale: 0.95, opacity: 0 }}
                       animate={{ scale, opacity: 1, x: offsetX }}
-                      exit={{ scale: 0.95, opacity: 0, x: swipeDirection * 200 }}
+                      exit={{ scale: 0.95, opacity: 0, x: swipeDirection * 50 }}
                       transition={{ duration: 0.3 }}
                       style={{ zIndex: images.length - index }}
                     >
