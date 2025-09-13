@@ -7,12 +7,13 @@ import { useEffect, useState, useRef } from 'react';
 
 export default function SwipeOrFocusMuseumImage() {
   const [museums, setMuseums] = useState([]);
+  const [images, setImages] = useState([]);
   const [showHint, setShowHint] = useState(true);
   const targetRef = useRef(null);
   const numberOfImages = museums.length;
 
   const handleSwipe = () => {
-    setMuseums((prev) => {
+    setImages((prev) => {
       if (prev.length === 0) return prev;
       const [first, ...rest] = prev;
       return [...rest, first];
@@ -30,6 +31,7 @@ export default function SwipeOrFocusMuseumImage() {
       }
       const data = await res.json();
       setMuseums(data);
+      setImages(data);
     }
 
     fetchMuseums();
@@ -57,9 +59,7 @@ export default function SwipeOrFocusMuseumImage() {
 
   useEffect(() => {
     if (!showHint) return;
-
     const timer = setTimeout(() => setShowHint(false), 3000);
-
     return () => clearTimeout(timer);
   }, [showHint]);
 
@@ -69,7 +69,7 @@ export default function SwipeOrFocusMuseumImage() {
       <h3 className="text-center text-lg text-gray-600 mt-4 mb-12">画像をクリックすると詳細ページに遷移します</h3>
       <div className="xl:hidden relative w-full h-[300px] sm:h-[500px] flex justify-center items-center mb-8">
         <AnimatePresence>
-          {museums
+          {images
             .filter(museum =>
               ["/images/exhibition-image/クジラの化石.png",
               "/images/exhibition-image/船と人類.jpg",
