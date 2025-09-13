@@ -68,76 +68,77 @@ export default function SwipeOrFocusMuseumImage() {
       <h2 className="text-center text-3xl sm:text-5xl mt-12">博物館</h2>
       <h3 className="text-center text-lg text-gray-600 mt-4 mb-12">画像をクリックすると詳細ページに遷移します</h3>
       <div className="xl:hidden relative w-full h-[300px] sm:h-[500px] flex justify-center items-center mb-8">
-        {museums
-          .filter(museum =>
-            ["/images/exhibition-image/クジラの化石.png",
-            "/images/exhibition-image/船と人類.jpg",
-            "/images/exhibition-image/昆虫展.png"
-            ].includes(museum.exhibitionImage)
-          )
-          .map((museum, index) => {
-            const front = index === 0;
-            const offsetX = index * 20;
-            const scale = 1 - index * 0.03;
+        <AnimatePresence>
+          {museums
+            .filter(museum =>
+              ["/images/exhibition-image/クジラの化石.png",
+              "/images/exhibition-image/船と人類.jpg",
+              "/images/exhibition-image/昆虫展.png"
+              ].includes(museum.exhibitionImage)
+            )
+            .map((museum, index) => {
+              const front = index === 0;
+              const offsetX = index * 20;
+              const scale = 1 - index * 0.03;
 
-            if (museum.exhibitionImage !== null) {
-              return (
-                <AnimatePresence key={museum.id}>
-                  <motion.div
-                    className="absolute"
-                    drag={front ? "x" : false}
-                    onDragEnd={(_, info) => {
-                      if (front && (info.offset.x < -100 || info.offset.x > 100)) {
-                        handleSwipe();
-                      }
-                    }}
-                    initial={{ scale: 0.95, opacity: 0 }}
-                    animate={{ scale, opacity: 1, x: offsetX }}
-                    exit={{ scale: 0.95, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    style={{
-                      zIndex: numberOfImages - index,
-                    }}
-                  >
+              if (museum.exhibitionImage !== null) {
+                return (
                     <motion.div
-                      ref={targetRef}
-                      animate={showHint && front ? { x: [0, -10, 0, 10, 0]} : {}}
-                      transition={showHint ? { duration: 2 } : {}}
+                      key={`${museum.id}-${index}`}
+                      className="absolute"
+                      drag={front ? "x" : false}
+                      onDragEnd={(_, info) => {
+                        if (front && (info.offset.x < -100 || info.offset.x > 100)) {
+                          handleSwipe();
+                        }
+                      }}
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      animate={{ scale, opacity: 1, x: offsetX }}
+                      exit={{ scale: 0.95, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      style={{
+                        zIndex: numberOfImages - index,
+                      }}
                     >
-                      <Link
-                        key={museum.id}
-                        href={`museums/${museum.id}`}
-                        className="
-                          rounded shadow hover:shadow-lg transition-shadow duration-200 cursor-pointer
-                        "
-                      >
-                        <Image
-                          src={museum.exhibitionImage}
-                          alt={museum.name}
-                          width={0}
-                          height={0}
-                          sizes="100vw"
-                          className="rounded-lg shadow-lg w-[250px] sm:w-[350px] md:w-[400px] h-auto"
-                        />
-                      </Link>
-                    </motion.div>
-
-                    {front && showHint && (
                       <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="absolute bottom-3 left-1/2 -translate-x-1/2 text-white bg-black/60 px-3 py-1 text-sm rounded"
+                        ref={targetRef}
+                        animate={showHint && front ? { x: [0, -10, 0, 10, 0]} : {}}
+                        transition={showHint ? { duration: 2 } : {}}
                       >
-                        左か右にスワイプ
+                        <Link
+                          key={museum.id}
+                          href={`museums/${museum.id}`}
+                          className="
+                            rounded shadow hover:shadow-lg transition-shadow duration-200 cursor-pointer
+                          "
+                        >
+                          <Image
+                            src={museum.exhibitionImage}
+                            alt={museum.name}
+                            width={0}
+                            height={0}
+                            sizes="100vw"
+                            className="rounded-lg shadow-lg w-[250px] sm:w-[350px] md:w-[400px] h-auto"
+                          />
+                        </Link>
                       </motion.div>
-                    )}
-                  </motion.div>
-                </AnimatePresence>
-              )
-            }
-        })}
+
+                      {front && showHint && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.5 }}
+                          className="absolute bottom-3 left-1/2 -translate-x-1/2 text-white bg-black/60 px-3 py-1 text-sm rounded"
+                        >
+                          左か右にスワイプ
+                        </motion.div>
+                      )}
+                    </motion.div>
+                )
+              }
+          })}
+        </AnimatePresence>
       </div>
       <div className="hidden xl:flex p-4 relative overflow-visible mb-8">
         {museums
