@@ -93,10 +93,10 @@ export default function SwipeOrFocusMuseumImage() {
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={museum.id + "-" + index}
+                      key={museum.id + "-" + swipeDirection}
                       className="absolute"
                       drag={front ? "x" : false}
-                      dragConstraints={{ left: -200, right: 200 }}
+                      dragConstraints={false}
                       onDragEnd={(_, info) => {
                         if (!front) return;
                         if (front && info.offset.x > 60) handleSwipe(1);
