@@ -84,7 +84,7 @@ export default function SwipeOrFocusMuseumImage() {
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={museum.id + "-" + images[0].id}
+                      key={museum.id + "-" + front}
                       className="absolute"
                       drag={front ? "x" : false}
                       onDragEnd={(_, info) => {
