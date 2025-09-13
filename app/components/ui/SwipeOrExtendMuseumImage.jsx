@@ -79,58 +79,61 @@ export default function SwipeOrFocusMuseumImage() {
 
             if (museum.exhibitionImage !== null) {
               return (
-                <AnimatePresence key={museum.exhibitionImage}>
-                  <motion.div
-                    className="absolute"
-                    drag={front ? "x" : false}
-                    onDragEnd={(info) => {
-                      if (front && (info.offset.x < -100 || info.offset.x > 100)) {
-                        handleSwipe();
-                      }
-                    }}
-                    initial={{ scale: 0.95, opacity: 0 }}
-                    animate={{ scale, opacity: 1, x: offsetX }}
-                    exit={{ scale: 0.95, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    style={{
-                      zIndex: numberOfImages - index,
-                    }}
-                  >
+                <AnimatePresence>
+                  {museum.length > 0 && (
                     <motion.div
-                      ref={targetRef}
-                      animate={showHint && front ? { x: [0, -10, 0, 10, 0]} : {}}
-                      transition={showHint ? { duration: 2 } : {}}
+                      key={museum[0].id}
+                      className="absolute"
+                      drag={front ? "x" : false}
+                      onDragEnd={(info) => {
+                        if (front && (info.offset.x < -100 || info.offset.x > 100)) {
+                          handleSwipe();
+                        }
+                      }}
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      animate={{ scale, opacity: 1, x: offsetX }}
+                      exit={{ scale: 0.95, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      style={{
+                        zIndex: numberOfImages - index,
+                      }}
                     >
-                      <Link
-                        key={museum.id}
-                        href={`museums/${museum.id}`}
-                        className="
-                          rounded shadow hover:shadow-lg transition-shadow duration-200 cursor-pointer
-                        "
-                      >
-                        <Image
-                          src={museum.exhibitionImage}
-                          alt={museum.name}
-                          width={0}
-                          height={0}
-                          sizes="100vw"
-                          className="rounded-lg shadow-lg w-[250px] sm:w-[350px] md:w-[400px] h-auto"
-                        />
-                      </Link>
-                    </motion.div>
-
-                    {front && showHint && (
                       <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="absolute bottom-3 left-1/2 -translate-x-1/2 text-white bg-black/60 px-3 py-1 text-sm rounded"
+                        ref={targetRef}
+                        animate={showHint && front ? { x: [0, -10, 0, 10, 0]} : {}}
+                        transition={showHint ? { duration: 2 } : {}}
                       >
-                        左か右にスワイプ
+                        <Link
+                          key={museum.id}
+                          href={`museums/${museum[0].id}`}
+                          className="
+                            rounded shadow hover:shadow-lg transition-shadow duration-200 cursor-pointer
+                          "
+                        >
+                          <Image
+                            src={museum[0].exhibitionImage}
+                            alt={museum[0].name}
+                            width={0}
+                            height={0}
+                            sizes="100vw"
+                            className="rounded-lg shadow-lg w-[250px] sm:w-[350px] md:w-[400px] h-auto"
+                          />
+                        </Link>
                       </motion.div>
-                    )}
-                  </motion.div>
+
+                      {front && showHint && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.5 }}
+                          className="absolute bottom-3 left-1/2 -translate-x-1/2 text-white bg-black/60 px-3 py-1 text-sm rounded"
+                        >
+                          左か右にスワイプ
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  )}
                 </AnimatePresence>
               )
             }
