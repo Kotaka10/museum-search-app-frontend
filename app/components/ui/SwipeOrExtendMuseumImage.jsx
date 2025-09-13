@@ -89,8 +89,8 @@ export default function SwipeOrFocusMuseumImage() {
                       className="absolute"
                       drag={front ? "x" : false}
                       onDragEnd={(_, info) => {
-                        if (front && info.offset.x > 100) handleSwipe(1);
-                        else if (front && info.offset.x < -100) handleSwipe(-1);
+                        if (front && info.offset.x > 50) handleSwipe(1);
+                        else if (front && info.offset.x < -50) handleSwipe(-1);
                       }}
                       initial={{ scale: 0.95, opacity: 0 }}
                       animate={{ scale, opacity: 1, x: offsetX }}
