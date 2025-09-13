@@ -90,12 +90,13 @@ export default function SwipeOrFocusMuseumImage() {
                       drag={front ? "x" : false}
                       dragConstraints={{ left: 0, right: 0 }}
                       onDragEnd={(_, info) => {
+                        if (!front) return;
                         if (front && info.offset.x > 100) handleSwipe(1);
                         else if (front && info.offset.x < -100) handleSwipe(-1);
                       }}
-                      initial={{ scale: 0.95, opacity: 0 }}
+                      initial={{ scale: 0.95, opacity: 0, x: offsetX }}
                       animate={{ scale, opacity: 1, x: offsetX }}
-                      exit={{ scale: 0.95, opacity: 0, x: swipeDirection * 300 }}
+                      exit={{ scale: 0.95, opacity: 0, x: swipeDirection * 200 }}
                       transition={{ duration: 0.3 }}
                       style={{ zIndex: images.length - index }}
                     >
