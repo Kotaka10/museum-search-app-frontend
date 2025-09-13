@@ -10,7 +10,7 @@ export default function SwipeOrFocusMuseumImage() {
   const [images, setImages] = useState([]);
   const [showHint, setShowHint] = useState(true);
   const targetRef = useRef(null);
-  const numberOfImages = museums.length;
+  const numberOfImages = images.length;
 
   const handleSwipe = () => {
     setImages((prev) => {
@@ -84,7 +84,7 @@ export default function SwipeOrFocusMuseumImage() {
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={`${museum.id}-${index}`}
+                      key={museum.id + "-" + images[0].id}
                       className="absolute"
                       drag={front ? "x" : false}
                       onDragEnd={(_, info) => {
@@ -101,12 +101,11 @@ export default function SwipeOrFocusMuseumImage() {
                       }}
                     >
                       <motion.div
-                        ref={targetRef}
+                        ref={front ? targetRef : null}
                         animate={showHint && front ? { x: [0, -10, 0, 10, 0]} : {}}
                         transition={showHint ? { duration: 2 } : {}}
                       >
                         <Link
-                          key={museum.id}
                           href={`museums/${museum.id}`}
                           className="
                             rounded shadow hover:shadow-lg transition-shadow duration-200 cursor-pointer
