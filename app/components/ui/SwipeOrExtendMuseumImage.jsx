@@ -30,9 +30,11 @@ export default function SwipeOrFocusMuseumImage() {
 
   useEffect(() => {
     const fetchMuseums = async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/all`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/all?t=${Date.now()}`, {
         credentials: 'include',
+        cache: "no-store",
       });
+
       if (!res.ok) {
         throw new Error('美術館の取得に失敗しました');
       }
@@ -91,7 +93,7 @@ export default function SwipeOrFocusMuseumImage() {
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={museum.id}
+                      key={museum.id + "-" + index}
                       className="absolute"
                       drag={front ? "x" : false}
                       dragConstraints={{ left: -200, right: 200 }}
