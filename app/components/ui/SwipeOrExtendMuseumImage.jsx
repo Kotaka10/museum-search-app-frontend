@@ -67,7 +67,7 @@ export default function SwipeOrFocusMuseumImage() {
       <h2 className="text-center text-3xl sm:text-5xl mt-12">博物館</h2>
       <h3 className="text-center text-lg text-gray-600 mt-4 mb-12">画像をクリックすると詳細ページに遷移します</h3>
       <div className="xl:hidden relative w-full h-[300px] sm:h-[500px] flex justify-center items-center mb-8">
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           {images
             .filter(museum =>
               ["/images/exhibition-image/クジラの化石.png",
@@ -83,17 +83,17 @@ export default function SwipeOrFocusMuseumImage() {
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={museum.id + "-" + images[0].id}
+                      key={museum.id}
                       className="absolute"
                       drag={front ? "x" : false}
                       onDragEnd={(_, info) => {
-                        if (front && (info.offset.x < -100 || info.offset.x > 100)) {
+                        if (front && Math.abs(info.offset.x) > 100) {
                           handleSwipe();
                         }
                       }}
                       initial={{ scale: 0.95, opacity: 0 }}
                       animate={{ scale, opacity: 1, x: offsetX }}
-                      exit={{ scale: 0.95, opacity: 0, x: offsetX }}
+                      exit={{ scale: 0.95, opacity: 0, x: front ? (info.offset?.x || 0) * 2 : 0 }}
                       transition={{ duration: 0.3 }}
                       style={{ zIndex: images.length - index }}
                     >
