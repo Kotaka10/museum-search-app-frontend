@@ -88,13 +88,14 @@ export default function SwipeOrFocusMuseumImage() {
                       key={museum.id + "-" + front}
                       className="absolute"
                       drag={front ? "x" : false}
+                      dragConstraints={{ left: 0, right: 0 }}
                       onDragEnd={(_, info) => {
-                        if (front && info.offset.x > 20) handleSwipe(1);
-                        else if (front && info.offset.x < -20) handleSwipe(-1);
+                        if (front && info.offset.x > 100) handleSwipe(1);
+                        else if (front && info.offset.x < -100) handleSwipe(-1);
                       }}
                       initial={{ scale: 0.95, opacity: 0 }}
                       animate={{ scale, opacity: 1, x: offsetX }}
-                      exit={{ scale: 0.95, opacity: 0, x: swipeDirection * 20 }}
+                      exit={{ scale: 0.95, opacity: 0, x: swipeDirection * 300 }}
                       transition={{ duration: 0.3 }}
                       style={{ zIndex: images.length - index }}
                     >
