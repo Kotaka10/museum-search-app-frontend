@@ -98,18 +98,26 @@ export default function SwipeOrFocusMuseumImage() {
                       drag={front ? "x" : false}
                       dragConstraints={{ left: 0, right: 0}}
                       dragElastic={0.8}
-                      onDragEnd={(_, info) => {
-                        if (!front) return;
-                        console.log("offsetX:", info.offset.x, "velocityX:", info.velocity.x, "swipePower:", swipePower);
+                      onDragEnd={
+                        front
+                          ? (_, info) => {
+                              if (!info) return; // ← 念のためチェック
 
-                        const swipePower = Math.abs(info.offset.x) * info.velocity.x;
+                              const offsetX = info.offset.x;
+                              // スワイプの勢い
+                              const velocityX = info.velocity.x;
 
-                        if (swipePower > 500 || info.offset.x > 50) {
-                          handleSwipe(1);
-                        } else if (swipePower < -500 || info.offset.x < -50) {
-                          handleSwipe(-1);
-                        }
-                      }}
+                              console.log("offsetX:", offsetX, "velocityX:", velocityX);
+
+                              // どちらかの条件を満たしたらスワイプ確定
+                              if (offsetX > 100 || velocityX > 500) {
+                                handleSwipe(1); // 右へ
+                              } else if (offsetX < -100 || velocityX < -500) {
+                                handleSwipe(-1); // 左へ
+                              }
+                            }
+                          : undefined
+                      }
                       initial={{ scale: 0.95, opacity: 0, x: offsetX }}
                       animate={{ scale, opacity: 1, x: offsetX }}
                       exit={{
