@@ -99,8 +99,14 @@ export default function SwipeOrFocusMuseumImage() {
                       dragConstraints={false}
                       onDragEnd={(_, info) => {
                         if (!front) return;
-                        if (front && info.offset.x > 60) handleSwipe(1);
-                        else if (front && info.offset.x < -60) handleSwipe(-1);
+                        
+                        const swipePower = Math.abs(info.offset.x) * info.velocity.x;
+
+                        if (swipePower > 1000 || info.offset.x > 80) {
+                          handleSwipe(1);
+                        } else if (swipePower < -1000 || info.offset.x < -80) {
+                          handleSwipe(-1);
+                        }
                       }}
                       initial={{ scale: 0.95, opacity: 0, x: offsetX }}
                       animate={{ scale, opacity: 1, x: offsetX }}
