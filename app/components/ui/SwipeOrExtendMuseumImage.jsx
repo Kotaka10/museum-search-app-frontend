@@ -1,6 +1,8 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
@@ -84,72 +86,32 @@ export default function SwipeOrFocusMuseumImage() {
       <h2 className="text-center text-3xl sm:text-5xl mt-12">博物館</h2>
       <h3 className="text-center text-lg text-gray-600 mt-4 mb-12">画像をクリックすると詳細ページに遷移します</h3>
       <div className="xl:hidden relative w-full h-[300px] sm:h-[500px] flex justify-center items-center mb-8">
-        <AnimatePresence initial={false}>
-          {images.slice(0, 3).map((museum, index) => {
-              const front = index === 0;
-              const offsetX = index * 20;
-              const scale = 1 - index * 0.03;
-
-              console.log("front:", front, "museum.id:", museum.id);
-              if (museum.exhibitionImage !== null) {
-                return (
-                    <motion.div
-                      className="absolute"
-                      drag="x"
-                      dragConstraints={false}
-                      dragElastic={0.8}
-                      style={{ zIndex: images.length - index, touchAction: "pan-y"}}
-                      onDragEnd={(_, info) => {
-                        console.log("drag end fired!", info);
-                      }}
-                      initial={{ scale: 0.95, opacity: 0, x: offsetX }}
-                      animate={{ scale, opacity: 1, x: offsetX }}
-                      exit={{
-                        x: swipeDirection > 0 ? 300 : -300,
-                        opacity: 0,
-                        scale: 0.95,
-                      }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <motion.div
-                        ref={front ? targetRef : null}
-                        animate={showHint && front ? { x: [0, -10, 0, 10, 0]} : {}}
-                        transition={showHint ? { duration: 2 } : {}}
-                      >
-                        <Link
-                          href={`museums/${museum.id}`}
-                          className="
-                            rounded shadow hover:shadow-lg transition-shadow duration-200 cursor-pointer
-                          "
-                        >
-                          <Image
-                            src={museum.exhibitionImage}
-                            alt={museum.name}
-                            width={0}
-                            height={0}
-                            sizes="100vw"
-                            style={{ pointerEvents: "none" }}
-                            className="rounded-lg shadow-lg w-[250px] sm:w-[350px] md:w-[400px] h-auto"
-                          />
-                        </Link>
-                      </motion.div>
-
-                      {front && showHint && (
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.5 }}
-                          className="absolute bottom-3 left-1/2 -translate-x-1/2 text-white bg-black/60 px-3 py-1 text-sm rounded"
-                        >
-                          左か右にスワイプ
-                        </motion.div>
-                      )}
-                    </motion.div>
-                )
-              }
-          })}
-        </AnimatePresence>
+        <Swiper
+          modules={[Pagination, Navigation]}
+          spaceBetween={20}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          navigation
+          className="rounded-lg shadow-lg"
+        >
+          {images.map((museum) => (
+              <SwiperSlide key={museum.id}>
+                <Link
+                  href={`/museums/${museum.id}`}
+                  className="block rounded shadow hover:shadow-lg transition-shadow duration-200"
+                >
+                  <Image
+                    src={museum.exhibitionImage}
+                    alt={museum.name}
+                    width={400}
+                    height={300}
+                    sizes="100vw"
+                    className="rounded-lg w-full h-auto object-cover"
+                  />
+                </Link>
+              </SwiperSlide>
+            ))}
+        </Swiper>
       </div>
       <div className="hidden xl:flex p-4 relative overflow-visible mb-8">
         {museums.map((museum, i) => (
