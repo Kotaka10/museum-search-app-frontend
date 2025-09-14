@@ -104,9 +104,9 @@ export default function SwipeOrFocusMuseumImage() {
                           ? (_, info) => {
                               if (!info) return; // ← 念のためチェック
 
-                              const offsetX = info.offset.x ?? 0;
+                              const offsetX = info.offset?.x ?? 0;
                               // スワイプの勢い
-                              const velocityX = info.velocity.x ?? 0;
+                              const velocityX = info.velocity?.x ?? 0;
 
                               console.log("offsetX:", offsetX, "velocityX:", velocityX);
 
@@ -127,7 +127,6 @@ export default function SwipeOrFocusMuseumImage() {
                         scale: 0.95,
                       }}
                       transition={{ duration: 0.3 }}
-                      style={{ zIndex: images.length - index }}
                     >
                       <motion.div
                         ref={front ? targetRef : null}
