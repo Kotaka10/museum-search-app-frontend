@@ -96,15 +96,17 @@ export default function SwipeOrFocusMuseumImage() {
                       key={museum.id + "-" + swipeDirection}
                       className="absolute"
                       drag={front ? "x" : false}
-                      dragConstraints={false}
+                      dragConstraints={{ left: 0, right: 0}}
+                      dragElastic={0.8}
                       onDragEnd={(_, info) => {
                         if (!front) return;
-                        
+                        console.log("offsetX:", info.offset.x, "velocityX:", info.velocity.x, "swipePower:", swipePower);
+
                         const swipePower = Math.abs(info.offset.x) * info.velocity.x;
 
-                        if (swipePower > 1000 || info.offset.x > 80) {
+                        if (swipePower > 500 || info.offset.x > 50) {
                           handleSwipe(1);
-                        } else if (swipePower < -1000 || info.offset.x < -80) {
+                        } else if (swipePower < -500 || info.offset.x < -50) {
                           handleSwipe(-1);
                         }
                       }}
