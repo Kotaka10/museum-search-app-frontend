@@ -96,7 +96,7 @@ export default function SwipeOrFocusMuseumImage() {
                     <motion.div
                       className="absolute"
                       drag="x"
-                      dragConstraints={{ left: 0, right: 0}}
+                      dragConstraints={false}
                       dragElastic={0.8}
                       style={{ zIndex: images.length - index, touchAction: "pan-y"}}
                       onDragEnd={(_, info) => {
@@ -128,6 +128,7 @@ export default function SwipeOrFocusMuseumImage() {
                             width={0}
                             height={0}
                             sizes="100vw"
+                            style={{ pointerEvents: "none" }}
                             className="rounded-lg shadow-lg w-[250px] sm:w-[350px] md:w-[400px] h-auto"
                           />
                         </Link>
