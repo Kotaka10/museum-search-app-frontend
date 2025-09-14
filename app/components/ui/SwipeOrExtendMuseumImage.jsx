@@ -90,35 +90,18 @@ export default function SwipeOrFocusMuseumImage() {
               const offsetX = index * 20;
               const scale = 1 - index * 0.03;
 
+              console.log("front:", front, "museum.id:", museum.id);
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={museum.id + "-" + swipeDirection}
                       className="absolute"
-                      drag={front ? "x" : false}
+                      drag="x"
                       dragConstraints={{ left: 0, right: 0}}
                       dragElastic={0.8}
                       style={{ zIndex: images.length - index, touchAction: "pan-y"}}
-                      onDragEnd={
-                        front
-                          ? (_, info) => {
-                              console.log("onDragEnd fired", info); // ← 念のためチェック
-
-                              const offsetX = info.offset?.x ?? 0;
-                              // スワイプの勢い
-                              const velocityX = info.velocity?.x ?? 0;
-
-                              console.log("offsetX:", offsetX, "velocityX:", velocityX);
-
-                              // どちらかの条件を満たしたらスワイプ確定
-                              if (offsetX > 100 || velocityX > 500) {
-                                handleSwipe(1); // 右へ
-                              } else if (offsetX < -100 || velocityX < -500) {
-                                handleSwipe(-1); // 左へ
-                              }
-                            }
-                          : undefined
-                      }
+                      onDragEnd={(_, info) => {
+                        console.log("drag end fired!", info);
+                      }}
                       initial={{ scale: 0.95, opacity: 0, x: offsetX }}
                       animate={{ scale, opacity: 1, x: offsetX }}
                       exit={{
