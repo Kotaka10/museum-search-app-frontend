@@ -26,16 +26,16 @@ export default function PrefectureCard() {
     return (
         <>
             <h2 className="text-center text-3xl sm:text-5xl mt-12 mb-7">エリアから探す</h2>
-            <div className="md:flex justify-center md:gap-20 mx-1">
+            <div className="md:flex justify-center md:gap-20 mx-2">
                 <div>
                     {Object.entries(pageLeftRegionToPrefectures).map(([region, prefectures]) => (
                         <div key={region} className="md:flex md:flex-col text-left">
                             <h3 className="text-start font-medium mb-2">{region}</h3>
-                            <ul className="flex flex-wrap gap-x-6 list-none mb-3">
+                            <ul className="flex flex-wrap gap-x-6 list-none mb-2">
                                 {prefectures.map((prefecture, index) => (
                                     <li
                                         key={index}
-                                        className="text-orange-400 hover:text-blue-500 cursor-pointer"
+                                        className="text-orange-400 hover:text-blue-500 cursor-pointer mb-2"
                                     >
                                         <Link
                                             href={`/prefecture?prefecture=${encodeURIComponent(prefecture)}`}

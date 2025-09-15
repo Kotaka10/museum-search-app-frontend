@@ -7,7 +7,7 @@ import GoogleMapsProvider from '@/app/providers/GoogleMapsProvider';
 
 export const metadata = {
   title: "美術館検索アプリ",
-  description: "全国にある美術館を検索・閲覧・お気に入り登録・コメントできるアプリです。自分の知っている美術館を登録することもできます。",
+  description: "全国にある美術館などを検索・閲覧・お気に入り登録・コメントできるアプリです。自分の知っている美術館を登録することもできます。",
 };
 
 export default function RootLayout({ children }) {

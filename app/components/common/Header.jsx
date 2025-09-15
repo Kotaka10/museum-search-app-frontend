@@ -21,7 +21,7 @@ export default function Header() {
     return (
         <header className="flex justify-between items-center p-2 bg-gray-100 shadow">
             <div>
-                <Link href="/" className="text-lg sm:text-3xl font-bold">Art Museum</Link>
+                <Link href="/" className="text-lg sm:text-3xl font-bold">Museum</Link>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-6 text-sm">
                 <SearchMuseums />
