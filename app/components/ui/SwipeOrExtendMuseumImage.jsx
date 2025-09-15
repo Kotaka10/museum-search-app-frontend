@@ -103,19 +103,13 @@ export default function SwipeOrFocusMuseumImage() {
                       onDragEnd={
                         front
                           ? (_, info) => {
-                              console.log("onDragEnd fired", info); // ← 念のためチェック
-
                               const offsetX = info.offset?.x ?? 0;
-                              // スワイプの勢い
                               const velocityX = info.velocity?.x ?? 0;
 
-                              console.log("offsetX:", offsetX, "velocityX:", velocityX);
-
-                              // どちらかの条件を満たしたらスワイプ確定
-                              if (offsetX > 100 || velocityX > 500) {
-                                handleSwipe(1); // 右へ
-                              } else if (offsetX < -100 || velocityX < -500) {
-                                handleSwipe(-1); // 左へ
+                              if (offsetX > 200 || velocityX > 500) {
+                                handleSwipe(1);
+                              } else if (offsetX < -200 || velocityX < -500) {
+                                handleSwipe(-1);
                               }
                             }
                           : undefined
