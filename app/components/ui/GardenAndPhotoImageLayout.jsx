@@ -29,7 +29,7 @@ export default function GardenImageLayout() {
 			<div
 				className="
 					w-full aspect-[5/7] sm:h-screen mb-8 sm:mb-0 gap-2 items-center justify-center mx-auto
-					grid grid-cols-2 grid-rows-1 p-4 xl:flex
+					grid grid-cols-2 grid-rows-2 p-4 xl:flex
 				"
 			>
 				{museums
@@ -37,6 +37,8 @@ export default function GardenImageLayout() {
 						[
 						'/images/exhibition-image/写真と肖像.jpg',
 						'/images/exhibition-image/55sen.jpg',
+						'/images/exhibition-image/六義園.JPG',
+						'/images/exhibition-image/小石川後楽園.JPG'
 						].includes(museum.exhibitionImage)
 					)
 					.map((museum, i) => (

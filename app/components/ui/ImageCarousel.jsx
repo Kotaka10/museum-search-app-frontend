@@ -60,6 +60,8 @@ export default function ImageCarousel() {
                                     museum.exhibitionImage !== "/images/exhibition-image/船と人類.jpg" &&
                                     museum.exhibitionImage !== "/images/exhibition-image/写真と肖像.jpg" &&
                                     museum.exhibitionImage !== "/images/exhibition-image/クジラの化石.png" &&
+                                    museum.exhibitionImage !== "/images/exhibition-image/小石川後楽園.JPG" &&
+                                    museum.exhibitionImage !== "/images/exhibition-image/六義園.JPG"
                                     museum.exhibitionImage !== "" &&
                                     museum.exhibitionImage !== null;
             if (exhibitionImage) {
