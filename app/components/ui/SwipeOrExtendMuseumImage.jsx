@@ -91,7 +91,6 @@ export default function SwipeOrFocusMuseumImage() {
               const offsetX = index * 20;
               const scale = 1 - index * 0.03;
 
-              console.log("front:", front, "museum.id:", museum.id);
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div

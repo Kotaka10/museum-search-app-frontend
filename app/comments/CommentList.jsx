@@ -77,7 +77,7 @@ export default function CommentList({ comments, setComments, currentUser }) {
                     const data = await res.text();
                     setDisplayName(data);
                 } else {
-                    console.log('表示名の取得に失敗しました');
+                    console.error('表示名の取得に失敗しました');
                 }
             } catch (err) {
                 console.error('表示名の取得に失敗しました');

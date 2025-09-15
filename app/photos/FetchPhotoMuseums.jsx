@@ -28,7 +28,7 @@ export default function FetchPhotoMuseums({ filteredPhotos, photo }) {
                 setMuseums(data.content);
                 setTotalPages(data.totalPages);
             } catch (err) {
-                console.log('データ取得に失敗しました' + err.message);
+                console.error('データ取得に失敗しました' + err.message);
             } finally {
                 setLoading(false);
             }

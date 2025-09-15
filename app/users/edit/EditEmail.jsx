@@ -29,7 +29,7 @@ export default function EditEmail() {
                     const data = await res.text();
                     setEmail(data);
                 } else {
-                    console.log('メールアドレスの取得に失敗しました');
+                    console.error('メールアドレスの取得に失敗しました');
                 }
             } catch (err) {
                 console.error('メールアドレスの取得に失敗しました');
