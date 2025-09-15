@@ -60,9 +60,9 @@ export default function ImageCarousel() {
                                     museum.exhibitionImage !== "/images/exhibition-image/船と人類.jpg" &&
                                     museum.exhibitionImage !== "/images/exhibition-image/写真と肖像.jpg" &&
                                     museum.exhibitionImage !== "/images/exhibition-image/クジラの化石.png" &&
-                                    museum.exhibitionImage !== "https://your-vercel-app.vercel.app/images/exhibition-image/川.PNG"
-                                    museum.exhibitionImage !== "https://your-vercel-app.vercel.app/images/exhibition-image/小石川後楽園.JPG" &&
-                                    museum.exhibitionImage !== "https://your-vercel-app.vercel.app/images/exhibition-image/六義園.JPG"
+                                    museum.exhibitionImage !== "/images/exhibition-image/kawa.PNG"
+                                    museum.exhibitionImage !== "/images/exhibition-image/koishikawa.JPG" &&
+                                    museum.exhibitionImage !== "/images/exhibition-image/rikugien.JPG"
                                     museum.exhibitionImage !== "" &&
                                     museum.exhibitionImage !== null;
             if (exhibitionImage) {

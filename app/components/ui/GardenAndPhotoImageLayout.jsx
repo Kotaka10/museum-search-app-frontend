@@ -37,8 +37,8 @@ export default function GardenImageLayout() {
 						[
 						'/images/exhibition-image/写真と肖像.jpg',
 						'/images/exhibition-image/55sen.jpg',
-						'/images/exhibition-image/六義園.JPG',
-						'/images/exhibition-image/小石川後楽園.JPG'
+						'/images/exhibition-image/rikugien.JPG',
+						'/images/exhibition-image/koishikawa.JPG'
 						].includes(museum.exhibitionImage)
 					)
 					.map((museum, i) => (

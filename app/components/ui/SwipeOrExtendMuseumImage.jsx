@@ -44,7 +44,7 @@ export default function SwipeOrFocusMuseumImage() {
           "/images/exhibition-image/クジラの化石.png",
           "/images/exhibition-image/船と人類.jpg",
           "/images/exhibition-image/昆虫展.png",
-          "/images/exhibition-image/川.PNG"
+          "/images/exhibition-image/kawa.PNG"
         ].includes(museum.exhibitionImage)
       );
       setMuseums(filtered);
