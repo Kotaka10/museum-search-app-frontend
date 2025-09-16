@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import NearbyMuseums from "@/app/nearby/ui/NearbyMuseums";
 
 export default function NearbyMuseumsClient() {
+    console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY)
     const [museums, setMuseums] = useState([]);
     const [error, setError] = useState('');
     
