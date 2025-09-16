@@ -26,13 +26,16 @@ function getDistance(currentLat, museumLat, currentLon, museumLon) {
 }
 
 export default function NearbyMuseums({ museums }) {
-    console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY)
     const [userLocation, setUserLocation] = useState(null);
     const [selectedMuseum, setSelectedMuseum] = useState(null);
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
         libraries: ["geometry"],
     });
+
+    useEffect(() => {
+        console.log('API Key:', process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
+    }, []);
 
     useEffect(() => {
         if (!navigator.geolocation) {
