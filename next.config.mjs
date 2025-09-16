@@ -3,7 +3,8 @@ export const images = {
   remotePatterns: [
     {
       protocol: "https",
-      hostname: "example.com",
+      hostname: "museum-search-app-theta.vercel.app",
+      pathname: "/images/**",
     },
     {
       protocol: "https",
