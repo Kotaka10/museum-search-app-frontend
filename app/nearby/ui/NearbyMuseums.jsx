@@ -32,6 +32,7 @@ export default function NearbyMuseums({ museums }) {
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
         libraries: ["geometry"],
     });
+    console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
 
     useEffect(() => {
         if (!navigator.geolocation) {
