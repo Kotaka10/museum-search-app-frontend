@@ -37,8 +37,8 @@ export default function GardenImageLayout() {
 						[
 						'/images/exhibition-image/写真と肖像.jpg',
 						'/images/exhibition-image/55sen.jpg',
-						'/images/exhibition-image/rikugien.JPG',
-						'/images/exhibition-image/koishikawa.JPG'
+						'https://museum-search-app-theta.vercel.app/images/exhibition-image/rikugien.JPG',
+						'https://museum-search-app-theta.vercel.app/images/exhibition-image/koishikawa.JPG'
 						].includes(museum.exhibitionImage)
 					)
 					.map((museum, i) => (
