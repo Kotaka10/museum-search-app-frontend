@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 
-const MapView = dynamic(() => import('@/app/components/common/MapView'), { ssr:false });
+const MapView = dynamic(() => import('@/app/nearby/ui/MapView'), { ssr:false });
 
 export default function MapWrapper({ latitude, longitude, name }) {
     return (
