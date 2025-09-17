@@ -29,7 +29,7 @@ export default function ImageCarousel() {
   return (
     <>
       <h2 className="text-center text-3xl sm:text-5xl mt-12">美術館</h2>
-      <h3 className="text-center text-lg text-gray-600 mt-4">画像をクリックすると詳細ページに遷移します</h3>
+      <h3 className="text-center text-lg text-gray-600 mt-4 mx-2">画像をクリックすると詳細ページに遷移します</h3>
       <div className="m-7 overflow-x-hidden">
         <Swiper
           modules={[FreeMode, Navigation, Mousewheel]}

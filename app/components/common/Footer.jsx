@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="bg-gray-100 border-t">
       <div className="max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between sm:justify-center sm:gap-8 text-sm text-gray-600">
         <p className="mb-2 sm:mb-0">
-          © 2025 古宮　隆宏 All rights reserved.
+          © 2025 Takahiro Komiya All rights reserved.
         </p>
         <div className="flex gap-4">
           <Link
