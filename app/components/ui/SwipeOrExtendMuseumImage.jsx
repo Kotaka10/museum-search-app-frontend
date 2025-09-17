@@ -94,7 +94,7 @@ export default function SwipeOrFocusMuseumImage() {
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={museum.id + "-" + swipeDirection}
+                      key={museum.id}
                       className="absolute"
                       drag={front ? "x" : false}
                       dragConstraints={{ left: 0, right: 0}}
@@ -126,7 +126,7 @@ export default function SwipeOrFocusMuseumImage() {
                       <motion.div
                         ref={front ? targetRef : null}
                         animate={showHint && front ? { x: [0, -10, 0, 10, 0]} : {}}
-                        transition={showHint ? { duration: 2 } : {}}
+                        transition={showHint ? { duration: 4 } : {}}
                       >
                         <Link
                           href={`museums/${museum.id}`}
@@ -150,7 +150,6 @@ export default function SwipeOrFocusMuseumImage() {
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
-                          transition={{ duration: 4 }}
                           className="absolute bottom-3 left-1/2 -translate-x-1/2 text-white bg-black/60 px-3 py-1 text-sm rounded"
                         >
                           左か右にスワイプ
