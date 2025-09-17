@@ -162,7 +162,7 @@ export default function SwipeOrFocusMuseumImage() {
           })}
         </AnimatePresence>
       </div>
-      <div className="hidden xl:flex xl:justify-center p-4 relative overflow-visible mb-8">
+      <div className="hidden lg:flex lg:justify-center p-4 relative overflow-visible mb-8">
         {museums.map((museum, i) => (
             <motion.div
               key={i}
