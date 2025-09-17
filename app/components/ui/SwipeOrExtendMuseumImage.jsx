@@ -84,7 +84,7 @@ export default function SwipeOrFocusMuseumImage() {
     <div className="mb-8">
       <h2 className="text-center text-3xl sm:text-5xl mt-12">博物館</h2>
       <h3 className="text-center text-lg text-gray-600 mt-4 mb-12">画像をクリックすると詳細ページに遷移します</h3>
-      <div className="xl:hidden relative w-full h-[300px] sm:h-[500px] flex justify-center items-center mb-8">
+      <div className="lg:hidden relative w-full h-[300px] sm:h-[500px] flex justify-center items-center mb-8">
         <AnimatePresence initial={false}>
           {images.slice(0, 4).map((museum, index) => {
               const front = index === 0;
