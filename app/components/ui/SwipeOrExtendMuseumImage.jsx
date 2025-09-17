@@ -117,11 +117,11 @@ export default function SwipeOrFocusMuseumImage() {
                       initial={{ scale: 0.95, opacity: 0, x: offsetX }}
                       animate={{ scale, opacity: 1, x: offsetX }}
                       exit={{
-                        x: swipeDirection > 0 ? 300 : -300,
+                        x: swipeDirection > 0 ? 150 : -150,
                         opacity: 0,
                         scale: 0.95,
                       }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.5 }}
                     >
                       <motion.div
                         ref={front ? targetRef : null}
