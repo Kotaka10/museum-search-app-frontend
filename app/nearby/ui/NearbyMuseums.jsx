@@ -28,9 +28,10 @@ function getDistance(currentLat, museumLat, currentLon, museumLon) {
 export default function NearbyMuseums({ museums }) {
     const [userLocation, setUserLocation] = useState(null);
     const [selectedMuseum, setSelectedMuseum] = useState(null);
+    const LIBRARIES = ["geometry"];
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-        libraries: ["geometry"],
+        libraries: LIBRARIES,
     });
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
     console.log(apiKey);
