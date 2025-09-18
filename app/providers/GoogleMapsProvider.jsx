@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function GoogleMapsProvider({ children }) {
   return (
     <LoadScript
-      googleMapsApiKey={process.env.NEXT_PUBLIC_MAPS_API_KEY}
+      googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
       loadingElement={
         <div className="relative w-full h-full">
           <Image  
