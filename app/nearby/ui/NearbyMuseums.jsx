@@ -25,10 +25,11 @@ function getDistance(currentLat, museumLat, currentLon, museumLon) {
     return earthRadiusKm * centralAngelRad;
 }
 
+const LIBRARIES = ["geometry"];
+
 export default function NearbyMuseums({ museums }) {
     const [userLocation, setUserLocation] = useState(null);
     const [selectedMuseum, setSelectedMuseum] = useState(null);
-    const LIBRARIES = ["geometry"];
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
         libraries: LIBRARIES,
