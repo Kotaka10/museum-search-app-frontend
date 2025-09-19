@@ -20,9 +20,8 @@ export default function SwipeOrFocusMuseumImage() {
         const [first, ...rest] = prev;
         return [...rest, first];
       } else {
-        const last = prev[prev.length - 1];
-        const rest = prev.slice(0, -1);
-        return [last, ...rest];
+        const [first, ...rest] = prev;
+        return [...rest, first];
       }
     });
     setShowHint(false);
@@ -106,7 +105,7 @@ export default function SwipeOrFocusMuseumImage() {
                               const offsetX = info.offset?.x ?? 0;
                               const velocityX = info.velocity?.x ?? 0;
 
-                              if (offsetX > 300 || velocityX > 1000) {
+                              if (offsetX > 200 || velocityX > 500) {
                                 handleSwipe(1);
                               } else if (offsetX < -200 || velocityX < -500) {
                                 handleSwipe(-1);
