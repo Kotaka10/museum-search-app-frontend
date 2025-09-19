@@ -108,7 +108,7 @@ export default function SwipeOrFocusMuseumImage() {
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={`${museum.id}-${swipeDirection}`}
+                      key={museum.id}
                       className="absolute"
                       drag={front ? "x" : false}
                       dragConstraints={{ left: 0, right: 0}}
