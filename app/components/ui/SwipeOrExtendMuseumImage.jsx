@@ -106,7 +106,7 @@ export default function SwipeOrFocusMuseumImage() {
                               const offsetX = info.offset?.x ?? 0;
                               const velocityX = info.velocity?.x ?? 0;
 
-                              if (offsetX > 200 || velocityX > 500) {
+                              if (offsetX > 300 || velocityX > 1000) {
                                 handleSwipe(1);
                               } else if (offsetX < -200 || velocityX < -500) {
                                 handleSwipe(-1);
