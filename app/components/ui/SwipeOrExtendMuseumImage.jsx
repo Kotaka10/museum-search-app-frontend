@@ -98,7 +98,7 @@ export default function SwipeOrFocusMuseumImage() {
                       className="absolute"
                       drag={front ? "x" : false}
                       dragConstraints={{ left: 0, right: 0}}
-                      dragElastic={0.8}
+                      dragElastic={0.5}
                       style={{ zIndex: images.length - index, touchAction: "pan-y"}}
                       onDragEnd={
                         front
@@ -121,7 +121,6 @@ export default function SwipeOrFocusMuseumImage() {
                           ? {
                               x: swipeDirection > 0 ? 150 : -150,
                               opacity: 0,
-                              scale: 0.95,
                             }
                           : undefined
                       }
