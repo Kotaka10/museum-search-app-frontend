@@ -83,7 +83,23 @@ export default function SwipeOrFocusMuseumImage() {
       <h2 className="text-center text-3xl sm:text-5xl mt-12">博物館</h2>
       <h3 className="text-center text-lg text-gray-600 mt-4 mx-2 mb-12">画像をクリックすると詳細ページに遷移します</h3>
       <div className="lg:hidden relative w-full h-[300px] sm:h-[500px] flex justify-center items-center mb-8">
-        <AnimatePresence initial={false}>
+        <AnimatePresence 
+          initial={false}
+          onExitComplete={() => {
+            if (swipeDirection !== 0) {
+              setImages((prev) => {
+                if (prev.length === 0) return prev;
+                if (swipeDirection > 0) {
+                  const [first, ...rest] = prev;
+                  return [...rest, first];
+                } else {
+                  return [prev[prev.length - 1], ...prev.slice(0, -1)];
+                }
+              });
+              setSwipeDirection(0);
+            }
+          }}
+        >
           {images.slice(0, 4).map((museum, index) => {
               const front = index === 0;
               const offsetX = index * 20;
@@ -92,7 +108,7 @@ export default function SwipeOrFocusMuseumImage() {
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={museum.id}
+                      key={`${museum.id}-${swipeDirection}`}
                       className="absolute"
                       drag={front ? "x" : false}
                       dragConstraints={{ left: 0, right: 0}}
