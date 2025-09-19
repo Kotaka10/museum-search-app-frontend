@@ -62,7 +62,7 @@ export default function SwipeOrFocusMuseumImage() {
           observer.disconnect();
         }
       },
-      {threshold: 0.5}
+      {threshold: 0.8}
     );
 
     if (targetRef.current) {
@@ -94,7 +94,7 @@ export default function SwipeOrFocusMuseumImage() {
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={`${museum.id}-${swipeDirection}`}
+                      key={museum.id}
                       className="absolute"
                       drag={front ? "x" : false}
                       dragConstraints={{ left: 0, right: 0}}
