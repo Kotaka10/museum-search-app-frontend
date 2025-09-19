@@ -3,14 +3,12 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function SwipeOrFocusMuseumImage() {
   const [museums, setMuseums] = useState([]);
   const [images, setImages] = useState([]);
   const [swipeDirection, setSwipeDirection] = useState(0);
-  const [showHint, setShowHint] = useState(true);
-  const targetRef = useRef(null);
 
   const handleSwipe = (direction) => {
     setSwipeDirection(direction);
@@ -25,7 +23,6 @@ export default function SwipeOrFocusMuseumImage() {
         return [...rest, first];
       }
     });
-    setShowHint(false);
   };
 
   useEffect(() => {
@@ -53,32 +50,6 @@ export default function SwipeOrFocusMuseumImage() {
 
     fetchMuseums();
   }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShowHint(true);
-          observer.disconnect();
-        }
-      },
-      {threshold: 0.8}
-    );
-
-    if (targetRef.current) {
-      observer.observe(targetRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!showHint) return;
-    const timer = setTimeout(() => setShowHint(false), 3000);
-    return () => clearTimeout(timer);
-  }, [showHint]);
 
   return (
     <div className="mb-8">
@@ -126,38 +97,21 @@ export default function SwipeOrFocusMuseumImage() {
                       }
                       transition={{ duration: 0.5 }}
                     >
-                      <motion.div
-                        ref={front ? targetRef : null}
-                        animate={showHint && front ? { x: [0, -10, 0, 10, 0]} : {}}
-                        transition={showHint ? { duration: 4 } : {}}
+                      <Link
+                        href={`museums/${museum.id}`}
+                        className="
+                          rounded shadow hover:shadow-lg transition-shadow duration-200 cursor-pointer
+                        "
                       >
-                        <Link
-                          href={`museums/${museum.id}`}
-                          className="
-                            rounded shadow hover:shadow-lg transition-shadow duration-200 cursor-pointer
-                          "
-                        >
-                          <Image
-                            src={museum.exhibitionImage}
-                            alt={museum.name}
-                            width={0}
-                            height={0}
-                            sizes="100vw"
-                            className="rounded-lg shadow-lg w-[250px] sm:w-[350px] md:w-[400px] h-auto"
-                          />
-                        </Link>
-                      </motion.div>
-
-                      {front && showHint && (
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          className="absolute bottom-3 left-1/2 -translate-x-1/2 text-white bg-black/60 px-3 py-1 text-sm rounded"
-                        >
-                          左か右にスワイプ
-                        </motion.div>
-                      )}
+                        <Image
+                          src={museum.exhibitionImage}
+                          alt={museum.name}
+                          width={0}
+                          height={0}
+                          sizes="100vw"
+                          className="rounded-lg shadow-lg w-[250px] sm:w-[350px] md:w-[400px] h-auto"
+                        />
+                      </Link>
                     </motion.div>
                 )
               }
