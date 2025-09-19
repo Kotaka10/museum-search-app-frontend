@@ -92,7 +92,7 @@ export default function SwipeOrFocusMuseumImage() {
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={`${museum.id}-${swipeDirection}`}
+                      key={museum.id}
                       className="absolute"
                       drag={front ? "x" : false}
                       dragConstraints={{ left: 0, right: 0}}
@@ -114,11 +114,15 @@ export default function SwipeOrFocusMuseumImage() {
                       }
                       initial={{ scale: 0.95, opacity: 0, x: offsetX }}
                       animate={{ scale, opacity: 1, x: offsetX }}
-                      exit={{
-                        x: swipeDirection > 0 ? 150 : -150,
-                        opacity: 0,
-                        scale: 0.95,
-                      }}
+                      exit={
+                        front
+                          ? {
+                              x: swipeDirection > 0 ? 150 : -150,
+                              opacity: 0,
+                              scale: 0.95,
+                            }
+                          : undefined
+                      }
                       transition={{ duration: 0.5 }}
                     >
                       <motion.div
