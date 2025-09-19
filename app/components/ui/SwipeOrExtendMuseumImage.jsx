@@ -17,8 +17,9 @@ export default function SwipeOrFocusMuseumImage() {
     setImages((prev) => {
       if (prev.length === 0) return prev;
       if (direction > 0) {
-        const [first, ...rest] = prev;
-        return [...rest, first];
+        const last = prev[prev.length - 1];
+        const rest = prev.slice(0, -1);
+        return [last, ...rest];
       } else {
         const [first, ...rest] = prev;
         return [...rest, first];
