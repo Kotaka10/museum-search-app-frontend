@@ -9,7 +9,7 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    const refresh = useCallback(async (overrideToken) => {
+    const refresh = useCallback(async () => {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/mypage`, {
                 method: 'GET',
