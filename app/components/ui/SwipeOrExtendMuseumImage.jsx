@@ -14,15 +14,6 @@ export default function SwipeOrFocusMuseumImage() {
 
   const handleSwipe = (direction) => {
     setSwipeDirection(direction);
-    setImages((prev) => {
-      if (prev.length === 0) return prev;
-      if (direction > 0) {
-        const [first, ...rest] = prev;
-        return [...rest, first];
-      } else {
-        return [prev[prev.length - 1], ...prev.slice(0, -1)];
-      }
-    });
     setShowHint(false);
   };
 
@@ -108,7 +99,7 @@ export default function SwipeOrFocusMuseumImage() {
               if (museum.exhibitionImage !== null) {
                 return (
                     <motion.div
-                      key={museum.id}
+                      key={`${museum.id}-${swipeDirection}`}
                       className="absolute"
                       drag={front ? "x" : false}
                       dragConstraints={{ left: 0, right: 0}}
