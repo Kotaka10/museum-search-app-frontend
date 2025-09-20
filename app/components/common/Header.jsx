@@ -26,7 +26,7 @@ export default function Header() {
             <div className="flex items-center space-x-2 sm:space-x-6 text-sm">
                 <SearchMuseums />
                 <Link href="/nearby" className="text-orange-500 hover:underline">マップ</Link>
-                {user ? (
+                {user && user.email ? (
                     <>
                         <Link href="/mypage" className="text-orange-500 hover:underline">マイページ</Link>
                         <button onClick={() => logout(refresh)} className="text-orange-500 hover:underline">

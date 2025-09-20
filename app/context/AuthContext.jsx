@@ -21,9 +21,8 @@ export function AuthProvider({ children }) {
             }
 
             const data = await res.json();
-            setUser(data);
+            etUser(data && data.email ? data : null);
         } catch (err) {
-            Cookies.remove('token');
             setUser(null);
         } finally {
             setIsLoading(false);
