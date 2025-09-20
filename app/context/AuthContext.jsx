@@ -21,8 +21,9 @@ export function AuthProvider({ children }) {
             }
 
             const data = await res.json();
-            setUser(data ? data : null);
+            setUser(data);
         } catch (err) {
+            Cookies.remove('token');
             setUser(null);
         } finally {
             setIsLoading(false);
