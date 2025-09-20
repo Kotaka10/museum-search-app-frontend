@@ -57,7 +57,6 @@ export default function CommentList({ comments, setComments, currentUser }) {
 
     useEffect(() => {
         const fetchDisplayName = async () => {
-            const token = Cookies.get('token');
 
             if (!token) {
                 console.error("トークンが存在しません。ユーザーが未ログインの可能性があります。");

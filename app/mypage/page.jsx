@@ -22,7 +22,7 @@ export default function Mypage() {
             const token = Cookies.get('token');
 
             if (!token) {
-                console.error("トークンが存在しません。ユーザーが未ログインの可能性があります。");
+                console.error("ユーザーが未ログインの可能性があります。");
                 return;
             }
 
