@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from "react";
-import Cookies from "js-cookie";
 import { useAuth } from '@/app/context/AuthContext';
 
 export default function RegisterUserPage() {
@@ -29,7 +28,6 @@ export default function RegisterUserPage() {
             const data = await res.json();
 
             if (data.token){
-                Cookies.set('token', data.token, {expires: 1});
                 await refresh(data.token);
                 window.location.href = "/";
             } else {

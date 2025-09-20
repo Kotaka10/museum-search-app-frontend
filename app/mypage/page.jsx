@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/app/context/AuthContext"; 
-import Cookies from "js-cookie";
 import ConfigSection from "@/app/components/ui/ConfigSection";
 import ViewedMuseums from "@/app/components/ui/ViewedMuseums";
 import CommentList from "@/app/comments/CommentList";
@@ -19,7 +18,6 @@ export default function Mypage() {
 
     useEffect(() => {
         const fetchUserComments = async () => {
-            const token = Cookies.get('token');
 
             if (!token) {
                 console.error("ユーザーが未ログインの可能性があります。");
@@ -29,10 +27,6 @@ export default function Mypage() {
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments/user`, {
                     method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
                     credentials: 'include',
                 });
                 if (res.ok) {

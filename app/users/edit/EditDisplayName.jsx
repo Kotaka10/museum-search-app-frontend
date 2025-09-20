@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
 
 export default function EditDisplayName() {
     const [displayName, setDisplayName] = useState('');
@@ -9,16 +8,11 @@ export default function EditDisplayName() {
 
     useEffect(() => {
         const fetchDisplayName = async () => {
-            const token = Cookies.get('token');
             if (!token) return;
 
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/display-name`, {
                     method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
                     credentials: 'include',
                 });
 
@@ -37,14 +31,10 @@ export default function EditDisplayName() {
     }, []);
 
     const handleUpdate = async () => {
-        const token = Cookies.get('token');
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/display-name`, {
                 method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
+                credentials: 'include',
                 body: JSON.stringify({ displayName })
             });
             if (res.ok) {

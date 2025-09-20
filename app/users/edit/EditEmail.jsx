@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
 import { useRouter } from "next/navigation";
 import { useAuth } from '@/app/context/AuthContext';
 
@@ -13,16 +12,11 @@ export default function EditEmail() {
 
     useEffect(() => {
         const fetchEmail = async () => {
-            const token = Cookies.get('token');
             if (!token) return;
 
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/email`, {
                     method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
                     credentials: 'include',
                 });
                 if (res.ok) {

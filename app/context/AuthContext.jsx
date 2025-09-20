@@ -1,7 +1,6 @@
 'use client';
 
 import { createContext, useEffect, useState, useContext, useCallback } from "react";
-import Cookies from "js-cookie";
 
 const AuthContext = createContext(null);
 
@@ -23,7 +22,6 @@ export function AuthProvider({ children }) {
             const data = await res.json();
             setUser(data);
         } catch (err) {
-            Cookies.remove('token');
             setUser(null);
         } finally {
             setIsLoading(false);

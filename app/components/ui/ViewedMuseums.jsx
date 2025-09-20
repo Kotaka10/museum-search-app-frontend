@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
 import Link from "next/link";
 import Image from "next/image";
 import { FaHistory } from 'react-icons/fa';
@@ -14,19 +13,10 @@ export default function ViewedMuseums() {
 
     useEffect(() => {
         const fetchViewedHistory = async () => {
-            const token = Cookies.get('token');
-            if (!token) {
-                setError('ログインが必要です');
-                router.push('/users/login');
-            }
-
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/viewed`, {
                     method: 'GET',
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
+                    credentials: 'include',
                 });
 
                 if (!res.ok) {
