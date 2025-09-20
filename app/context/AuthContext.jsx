@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
             }
 
             const data = await res.json();
-            setUser(data && data.email ? data : null);
+            setUser(data ? data : null);
         } catch (err) {
             setUser(null);
         } finally {
