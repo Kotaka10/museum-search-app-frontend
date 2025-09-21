@@ -25,9 +25,12 @@ export default function RegisterUserPage() {
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include'
             });
-            if (res.ok) {
-                await refresh();
+            if (!res.ok) {
+                const err = await res.json();
+                alert(err.message || "登録に失敗しました");
+                return;
             }
+            
             const data = await res.json();
 
             if (data.token){
