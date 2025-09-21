@@ -45,7 +45,7 @@ export default function LoginPage() {
             <form onSubmit={handleLogin} className="max-w-72 sm:max-w-md mx-auto mt-10">
                 <h1 className="text-2xl font-bold mb-4">ログイン</h1>
                 <input
-                    value={email}
+                    value={userName}
                     onChange={(e) => setUserName(e.target.value)}
                     type="text"
                     placeholder="ユーザー名"
