@@ -18,7 +18,7 @@ export default function EditEmail() {
                     credentials: 'include',
                 });
                 if (res.ok) {
-                    const data = await res.text();
+                    const data = (await res.text().trim());
                     setEmail(data);
                 } else {
                     console.error('メールアドレスの取得に失敗しました');
@@ -32,7 +32,6 @@ export default function EditEmail() {
     }, []);
 
     const handleUpdate = async () => {
-
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/email`, {
                 method: 'PUT',
@@ -45,7 +44,7 @@ export default function EditEmail() {
             if (res.ok) {
                 refresh();
                 router.push("/users/login");
-                alert('再ログインしてください');
+                alert('登録に成功しました。再ログインしてください');
             } else {
                 setMessage("更新に失敗しました");
             }
