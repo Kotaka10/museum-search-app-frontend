@@ -8,8 +8,6 @@ export default function EditDisplayName() {
 
     useEffect(() => {
         const fetchDisplayName = async () => {
-            if (!token) return;
-
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/display-name`, {
                     method: 'GET',
@@ -17,7 +15,7 @@ export default function EditDisplayName() {
                 });
 
                 if (res.ok) {
-                    const name = await res.text();
+                    const name = ((await res.text()).trim());
                     setDisplayName(name);
                 } else {
                     setMessage('表示名の取得に失敗しました');
@@ -35,6 +33,9 @@ export default function EditDisplayName() {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/display-name`, {
                 method: 'PUT',
                 credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify({ displayName })
             });
             if (res.ok) {

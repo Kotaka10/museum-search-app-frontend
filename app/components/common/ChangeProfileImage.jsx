@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import { AwardIcon } from "lucide-react";
 
 export default function ChangeProfileImage({ userId }) {
     const [imageUrl, setImageUrl] = useState('/images/profile/人物のアイコン素材 その3.png');
@@ -28,7 +29,7 @@ export default function ChangeProfileImage({ userId }) {
                 })
                 .then(data => {
                     if (data.imageUrl) {
-                        const fullImageUrl = `http://localhost:8080${data.imageUrl}`;
+                        const fullImageUrl = `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`;
                         setImageUrl(fullImageUrl);
                         localStorage.setItem(storageKey, fullImageUrl);
                     }
@@ -65,10 +66,9 @@ export default function ChangeProfileImage({ userId }) {
                 throw new Error('プロフィール画像のアップロードに失敗しました' + errorText);
             }
 
-            const dataText = await res.text();
-            const data = JSON.parse(dataText);
+            const data = await res.json();
             if (data.imageUrl) {
-                const fullImageUrl = `http://localhost:8080${data.imageUrl}`;
+                const fullImageUrl = `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`;
                 setImageUrl(fullImageUrl);
                 localStorage.setItem(storageKey, fullImageUrl);
             }
@@ -78,7 +78,7 @@ export default function ChangeProfileImage({ userId }) {
     };
 
     return (
-        <div className="relaive w-40 h-40">
+        <div className="relaTive w-40 h-40">
             <Image
                 src={imageUrl}
                 alt="プロフィール画像"
