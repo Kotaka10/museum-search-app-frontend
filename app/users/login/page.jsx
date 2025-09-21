@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from '@/app/context/AuthContext';
 
 export default function LoginPage() {
-    const [email, setEmail] = useState('');
+    const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
     const { refresh } = useAuth();
@@ -18,7 +18,7 @@ export default function LoginPage() {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: new URLSearchParams({ email, password }),
+                body: new URLSearchParams({ userNameOrEmail: userName, password }),
                 credentials: 'include',
             });
             
@@ -46,9 +46,9 @@ export default function LoginPage() {
                 <h1 className="text-2xl font-bold mb-4">ログイン</h1>
                 <input
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    type="email"
-                    placeholder="メールアドレス"
+                    onChange={(e) => setUserName(e.target.value)}
+                    type="text"
+                    placeholder="ユーザー名"
                     required
                     className="w-full p-2 border mb-2 focus:ring-2 focus:outline-none focus:ring-orange-500"
                 />

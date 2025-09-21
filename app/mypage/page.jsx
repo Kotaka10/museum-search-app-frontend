@@ -7,7 +7,7 @@ import ViewedMuseums from "@/app/components/ui/ViewedMuseums";
 import CommentList from "@/app/comments/CommentList";
 import RegisterMuseumsList from "@/app/users/register/RegisterMuseumsList";
 import Link from "next/link";
-import EditDisplayName from "@/app/users/edit/EditDisplayName";
+import EditUserName from "@/app/users/edit/EditUserName";
 import EditEmail from "@/app/users/edit/EditEmail";
 import { FaCog } from 'react-icons/fa';
 
@@ -46,7 +46,7 @@ export default function Mypage() {
     }, [user]);
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col bg-gradient-to-tr from-">
             <div className="border-b">
                 <div className="flex justify-center items-center w-1/2 mx-auto gap-1 my-6 bg-gray-100 rounded shadow">
                     <FaCog className="w-7 h-7 text-gray-700" />
@@ -55,7 +55,7 @@ export default function Mypage() {
                 <div className="flex flex-col sm:flex-row sm:justify-center items-center mx-2">
                     <ConfigSection />
                     <div className="ml-6">
-                        <EditDisplayName />
+                        <EditUserName />
                         <EditEmail />
                     </div>
                 </div>

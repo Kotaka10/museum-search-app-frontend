@@ -7,7 +7,7 @@ export default function RegisterUserPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [displayName, setDisplayName] = useState('');
+    const [userName, setUserName] = useState('');
     const { refresh } = useAuth();
 
     const handleRegister = async (e) => {
@@ -21,7 +21,7 @@ export default function RegisterUserPage() {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/register`, {
                 method: 'POST',
-                body: JSON.stringify({ email, password, displayName }),
+                body: JSON.stringify({ email, password, userName }),
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include'
             });
@@ -34,7 +34,7 @@ export default function RegisterUserPage() {
                 alert("トークンが返されませんでした");
             }
         } catch (err) {
-            alert('登録に失敗しました' + err.message);
+            alert('登録に失敗しました');
         }
     };
 
@@ -67,10 +67,10 @@ export default function RegisterUserPage() {
                     className="w-full p-2 border mb-2 focus:ring-2 focus:outline-none focus:ring-orange-500"
                 />
                 <input
-                    value={displayName}
-                    onChange={(e) => setDisplayName(e.target.value)}
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
                     type="text"
-                    placeholder="表示名"
+                    placeholder="ユーザー名"
                     required
                     className="w-full p-2 border mb-2 focus:ring-2 focus:outline-none focus:ring-orange-500"
                 />
