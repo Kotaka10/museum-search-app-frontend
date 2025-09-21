@@ -25,6 +25,9 @@ export default function RegisterUserPage() {
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include'
             });
+            if (res.ok) {
+                await refresh();
+            }
             const data = await res.json();
 
             if (data.token){

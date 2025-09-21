@@ -9,7 +9,7 @@ import { useAuth } from "@/app/context/AuthContext";
 export default function CommentList({ comments, setComments, currentUser }) {
     const [editingId, setEditingId] = useState(null);
     const [editedContent, setEditedContent] = useState('');
-    const [displayName, setDisplayName] = useState('');
+    const [userName, setUserName] = useState('');
     const { user } = useAuth();
 
     const handleDelete = async (commentId) => {
@@ -74,7 +74,7 @@ export default function CommentList({ comments, setComments, currentUser }) {
                 });
                 if (res.ok) {
                     const data = await res.text();
-                    setDisplayName(data);
+                    setUserName(data);
                 } else {
                     console.error('表示名の取得に失敗しました');
                 }
@@ -102,7 +102,7 @@ export default function CommentList({ comments, setComments, currentUser }) {
                         <div className="border-2 p-4 rounded shadow-sm bg-white w-full">
                             <div className="relative flex gap-8 items-center w-[30px] h-[30px]">
                                 {user && <ChangeProfileImage userId={user.id} />}
-                                <p className="font-semibold">{displayName}</p>
+                                <p className="font-semibold">{userName}</p>
                             </div>
 
                             {comment.museumName && (
