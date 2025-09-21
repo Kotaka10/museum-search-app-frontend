@@ -18,7 +18,7 @@ export default function LoginPage() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: new URLSearchParams({ loginId: userNameOrEmail, password }),
+                body: JSON.stringify({ loginId: userNameOrEmail, password }),
                 credentials: 'include',
             });
             
