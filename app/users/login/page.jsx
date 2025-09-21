@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from '@/app/context/AuthContext';
 
 export default function LoginPage() {
-    const [userName, setUserName] = useState('');
+    const [userNameOrEmail, setUserNameOrEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
     const { refresh } = useAuth();
@@ -18,7 +18,7 @@ export default function LoginPage() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: new URLSearchParams({ userName, password }),
+                body: new URLSearchParams({ loginId: userNameOrEmail, password }),
                 credentials: 'include',
             });
             
@@ -45,10 +45,10 @@ export default function LoginPage() {
             <form onSubmit={handleLogin} className="max-w-72 sm:max-w-md mx-auto mt-10">
                 <h1 className="text-2xl font-bold mb-4">ログイン</h1>
                 <input
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
+                    value={userNameOrEmail}
+                    onChange={(e) => setUserNameOrEmail(e.target.value)}
                     type="text"
-                    placeholder="ユーザー名"
+                    placeholder="メールアドレスまたはユーザー名"
                     required
                     className="w-full p-2 border mb-2 focus:ring-2 focus:outline-none focus:ring-orange-500"
                 />
