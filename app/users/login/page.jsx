@@ -16,9 +16,9 @@ export default function LoginPage() {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/login`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/json',
                 },
-                body: new URLSearchParams({ userName: userName, password }),
+                body: new URLSearchParams({ userName, password }),
                 credentials: 'include',
             });
             

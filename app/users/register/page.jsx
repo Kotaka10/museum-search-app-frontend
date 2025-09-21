@@ -30,11 +30,11 @@ export default function RegisterUserPage() {
                 alert(err.message || "登録に失敗しました");
                 return;
             }
-            
+
             const data = await res.json();
 
             if (data.token){
-                await refresh(data.token);
+                await refresh();
                 window.location.href = "/";
             } else {
                 alert("トークンが返されませんでした");
