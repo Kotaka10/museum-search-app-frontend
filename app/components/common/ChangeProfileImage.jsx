@@ -78,7 +78,7 @@ export default function ChangeProfileImage({ userId }) {
     };
 
     return (
-        <div className="relative w-40 h-40">
+        <div className="relative w-30 h-30">
             <Image
                 src={imageUrl}
                 alt="プロフィール画像"
