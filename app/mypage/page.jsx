@@ -46,7 +46,7 @@ export default function Mypage() {
     }, [user]);
 
     return (
-        <div className="flex flex-col bg-gradient-to-tr from-">
+        <div className="flex flex-col bg-gradient-to-tr from-teal-100 via-emerald-100 to-green-100">
             <div className="border-b">
                 <div className="flex justify-center items-center w-1/2 mx-auto gap-1 my-6 bg-gray-100 rounded shadow">
                     <FaCog className="w-7 h-7 text-gray-700" />
