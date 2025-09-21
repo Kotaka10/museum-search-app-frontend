@@ -44,7 +44,7 @@ export default function EditEmail() {
             if (res.ok) {
                 refresh();
                 router.push("/users/login");
-                alert('登録に成功しました。再ログインしてください');
+                alert(`メールアドレスを「${email}」に更新しました。新しいメールアドレスで再ログインしてください。`);
             } else {
                 setMessage("更新に失敗しました");
             }
