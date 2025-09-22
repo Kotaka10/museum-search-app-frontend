@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { FaComment } from "react-icons/fa";
-import Cookies from "js-cookie";
 import ChangeProfileImage from "@/app/components/common/ChangeProfileImage";
 import { useAuth } from "@/app/context/AuthContext";
 
