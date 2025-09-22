@@ -92,13 +92,13 @@ export default function CommentList({ comments, setComments, currentUser }) {
                 latestComments.map(comment => (
                     <div key={comment.id} className="w-full overflow-x-auto">
                         <div className="border-2 p-4 rounded shadow-sm bg-white w-full">
-                            <div className="flex gap-2">
+                            <div className="flex items-center">
                                 <div className="relative flex gap-8 items-center w-[30px] h-[30px]">
                                     {user && <ChangeProfileImage userId={user.id} />}
                                     <p className="font-semibold">{userName}</p>
                                 </div>
                                 {comment.museumName && (
-                                    <p className="text-sm text-gray-600 ml-4 mb-1">美術館: {comment.museumName}</p>
+                                    <p className="text-sm text-gray-600 ml-6 mb-1">美術館: {comment.museumName}</p>
                                 )}
                             </div>
 
