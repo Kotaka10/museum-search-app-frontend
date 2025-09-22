@@ -6,7 +6,6 @@ import Image from "next/image";
 export default function ChangeProfileImage({ userId }) {
     const [imageUrl, setImageUrl] = useState('/images/profile/人物のアイコン素材 その3.png');
     const fileInputRef = useRef(null);
-    const storageKey = `profileImageUrl_${userId}`;
 
     const handleImageClick = () => {
         fileInputRef.current.click();
@@ -15,28 +14,22 @@ export default function ChangeProfileImage({ userId }) {
     useEffect(() => {
         if (!userId) return;
 
-        const savedImageUrl = localStorage.getItem(storageKey);
-        if (savedImageUrl) {
-            setImageUrl(savedImageUrl);
-        } else {
-            fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${userId}/profile-image`, {
-                credentials: 'include',
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${userId}/profile-image`, {
+            credentials: 'include',
+        })
+            .then(res => {
+                if (!res.ok) throw new Error('プロフィール画像取得に失敗しました');
+                return res.json();
             })
-                .then(res => {
-                    if (!res.ok) throw new Error('プロフィール画像取得に失敗しました');
-                    return res.json();
-                })
-                .then(data => {
-                    if (data.imageUrl) {
-                        const fullImageUrl = `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`;
-                        setImageUrl(fullImageUrl);
-                        localStorage.setItem(storageKey, fullImageUrl);
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                });
-        }
+            .then(data => {
+                if (data.imageUrl) {
+                    const fullImageUrl = `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`;
+                    setImageUrl(fullImageUrl);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            });
     }, [userId]);
     
     const handleImageChange = async (e) => {
@@ -46,9 +39,6 @@ export default function ChangeProfileImage({ userId }) {
             alert("ファイルサイズが大きすぎます。10MB以内にしてください。");
             return;
         }
-
-        const previewUrl = URL.createObjectURL(file);
-        setImageUrl(previewUrl);
 
         const formData = new FormData();
         formData.append('image', file);
@@ -71,7 +61,6 @@ export default function ChangeProfileImage({ userId }) {
                     ? data.imageUrl
                     : `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`;
                 setImageUrl(fullImageUrl);
-                localStorage.setItem(storageKey, fullImageUrl);
             }
         } catch (err) {
             alert('プロフィール画像のアップロードに失敗しました: ' + err.message);
@@ -79,7 +68,7 @@ export default function ChangeProfileImage({ userId }) {
     };
 
     return (
-        <div className="w-24 h-24">
+        <div className="w-20 h-20 relative">
             <Image
                 src={imageUrl}
                 alt="プロフィール画像"
