@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
                 method: 'GET',
                 credentials: 'include',
             });
-            console.log("mypage status:", res.status);
+        console.log("mypage status:", res.status);
 
             if (!res.ok) {
                 throw new Error("認証情報が無効です");
