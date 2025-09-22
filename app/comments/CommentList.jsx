@@ -98,7 +98,7 @@ export default function CommentList({ comments, setComments, currentUser }) {
                                     <p className="font-semibold">{userName}</p>
                                 </div>
                                 {comment.museumName && (
-                                    <p className="text-sm text-gray-600 mb-1">美術館: {comment.museumName}</p>
+                                    <p className="text-sm text-gray-600 ml-4 mb-1">美術館: {comment.museumName}</p>
                                 )}
                             </div>
 
