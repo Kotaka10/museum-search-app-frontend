@@ -18,8 +18,8 @@ export default function EditEmail() {
                     credentials: 'include',
                 });
                 if (res.ok) {
-                    const data = (await res.text().trim());
-                    setEmail(data);
+                    const data = await res.text();
+                    setEmail(data.trim());
                 } else {
                     console.error('メールアドレスの取得に失敗しました');
                 }

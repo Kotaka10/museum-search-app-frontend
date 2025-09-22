@@ -15,8 +15,8 @@ export default function EditUserName() {
                 });
 
                 if (res.ok) {
-                    const name = ((await res.text()).trim());
-                    setUserName(name);
+                    const name = (await res.text());
+                    setUserName(name.trim());
                 } else {
                     setMessage('表示名の取得に失敗しました');
                 }

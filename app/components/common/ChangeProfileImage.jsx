@@ -68,7 +68,9 @@ export default function ChangeProfileImage({ userId }) {
 
             const data = await res.json();
             if (data.imageUrl) {
-                const fullImageUrl = `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`;
+                const fullImageUrl = data.imageUrl.startsWith('http')
+                    ? data.imageUrl
+                    : `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`;
                 setImageUrl(fullImageUrl);
                 localStorage.setItem(storageKey, fullImageUrl);
             }
