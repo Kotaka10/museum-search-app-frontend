@@ -57,17 +57,10 @@ export default function CommentList({ comments, setComments, currentUser }) {
 
     useEffect(() => {
         const fetchDisplayName = async () => {
-
-            if (!token) {
-                console.error("トークンが存在しません。ユーザーが未ログインの可能性があります。");
-                return;
-            }
-            
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/display-name`, {
                     method: 'GET',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     },
                     credentials: 'include',

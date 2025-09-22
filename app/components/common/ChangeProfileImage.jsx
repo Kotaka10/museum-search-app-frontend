@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 
 export default function ChangeProfileImage({ userId }) {
-    const [imageUrl, setImageUrl] = useState('/images/profile/人物のアイコン素材 その3.png');
+    const [imageUrl, setImageUrl] = useState('/images/profile/profile.jpg');
     const fileInputRef = useRef(null);
 
     const handleImageClick = () => {
@@ -25,7 +25,7 @@ export default function ChangeProfileImage({ userId }) {
                 if (data.imageUrl) {
                     const fullImageUrl = data.imageUrl 
                         ? (data.imageUrl.startsWith('http') ? data.imageUrl : `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`)
-                        : '/images/profile/人物のアイコン素材 その3.png';
+                        : '/images/profile/profile.jpg';
                     setImageUrl(fullImageUrl);
                 }
             })

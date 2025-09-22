@@ -12,18 +12,12 @@ import EditEmail from "@/app/users/edit/EditEmail";
 import { FaCog } from 'react-icons/fa';
 
 export default function Mypage() {
-    const { user } = useAuth();
+    const { user , isLoading} = useAuth();
     const [comments, setComments] = useState([]);
     const currentUser = user?.email || null;
 
     useEffect(() => {
         const fetchUserComments = async () => {
-
-            if (!token) {
-                console.error("ユーザーが未ログインの可能性があります。");
-                return;
-            }
-
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments/user`, {
                     method: 'GET',
@@ -40,10 +34,9 @@ export default function Mypage() {
             }
         };
 
-        if (user) {
+            if (!user || !isLoading) return;
             fetchUserComments();
-        }
-    }, [user]);
+    }, [user, isLoading]);
 
     return (
         <div className="flex flex-col bg-gradient-to-tr from-teal-50 via-emerald-50 to-green-50">
