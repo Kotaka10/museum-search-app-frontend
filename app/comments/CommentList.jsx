@@ -92,7 +92,7 @@ export default function CommentList({ comments, setComments, currentUser }) {
                 latestComments.map(comment => (
                     <div key={comment.id} className="w-full overflow-x-auto">
                         <div className="border-2 p-4 rounded shadow-sm bg-white w-full">
-                            <div className="relative flex gap-8 items-center w-[30px] h-[30px]">
+                            <div className="relative flex gap-8 items-center justify-center w-[30px] h-[30px]">
                                 {user && <ChangeProfileImage userId={user.id} />}
                                 <p className="font-semibold">{userName}</p>
                                 {comment.museumName && (
