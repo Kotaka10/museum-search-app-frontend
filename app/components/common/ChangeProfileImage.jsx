@@ -79,12 +79,12 @@ export default function ChangeProfileImage({ userId }) {
     };
 
     return (
-        <div className="relative w-32 h-32">
+        <div className="w-24 h-24">
             <Image
                 src={imageUrl}
                 alt="プロフィール画像"
                 fill
-                className="rounded-full cursor-pointer object-cover"
+                className="rounded-full border cursor-pointer object-cover"
                 onClick={handleImageClick}
             />
             <input
