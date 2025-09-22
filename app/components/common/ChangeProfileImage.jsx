@@ -23,7 +23,9 @@ export default function ChangeProfileImage({ userId }) {
             })
             .then(data => {
                 if (data.imageUrl) {
-                    const fullImageUrl = `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`;
+                    const fullImageUrl = data.imageUrl 
+                        ? (data.imageUrl.startsWith('http') ? data.imageUrl : `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`)
+                        : '/images/profile/人物のアイコン素材 その3.png';
                     setImageUrl(fullImageUrl);
                 }
             })
@@ -68,7 +70,7 @@ export default function ChangeProfileImage({ userId }) {
     };
 
     return (
-        <div className="w-20 h-20 relative">
+        <div className="w-24 h-24 relative">
             <Image
                 src={imageUrl}
                 alt="プロフィール画像"
