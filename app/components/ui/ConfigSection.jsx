@@ -41,9 +41,11 @@ export default function ConfigSection() {
         <div className="my-6">
             <div className="flex items-center gap-8 max-w-xl mx-auto mt-10">
                 <div className="flex flex-col items-center">
-                    {user && 
-                        <ChangeProfileImage userId={user.id} />
-                    }
+                    <div className="relative w-[90px] h-[90px] md:w-[100px] md:h-[100px]">
+                        {user && 
+                            <ChangeProfileImage userId={user.id} />
+                        }
+                    </div>
                     <p className="mt-2 text-gray-900">画像をクリックして変更する</p>
                 </div>
                 <div className="flex flex-col gap-3">

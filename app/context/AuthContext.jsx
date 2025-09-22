@@ -9,21 +9,17 @@ export function AuthProvider({ children }) {
     const [isLoading, setIsLoading] = useState(true);
 
     const refresh = useCallback(async () => {
-    console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
-
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/mypage`, {
                 method: 'GET',
                 credentials: 'include',
             });
-            console.log("mypage status:", res.status);
 
             if (!res.ok) {
                 throw new Error("認証情報が無効です");
             }
 
             const data = await res.json();
-        console.log("mypage response:", data); 
             setUser(data);
         } catch (err) {
             setUser(null);

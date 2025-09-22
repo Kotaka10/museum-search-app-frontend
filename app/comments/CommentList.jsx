@@ -95,11 +95,10 @@ export default function CommentList({ comments, setComments, currentUser }) {
                             <div className="relative flex gap-8 items-center w-[30px] h-[30px]">
                                 {user && <ChangeProfileImage userId={user.id} />}
                                 <p className="font-semibold">{userName}</p>
+                                {comment.museumName && (
+                                    <p className="text-sm text-gray-600 mb-1">美術館: {comment.museumName}</p>
+                                )}
                             </div>
-
-                            {comment.museumName && (
-                                <p className="text-sm text-gray-600 mb-1">美術館: {comment.museumName}</p>
-                            )}
 
                             {editingId === comment.id ? (
                                 <>
