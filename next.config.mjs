@@ -10,7 +10,8 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "another.com",
+        hostname: "museum-research-app-backend.onrender.com",
+        pathname: "/uploads/**",
       },
     ],
   },
