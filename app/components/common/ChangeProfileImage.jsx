@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { AwardIcon } from "lucide-react";
 
 export default function ChangeProfileImage({ userId }) {
     const [imageUrl, setImageUrl] = useState('/images/profile/人物のアイコン素材 その3.png');
@@ -80,7 +79,7 @@ export default function ChangeProfileImage({ userId }) {
     };
 
     return (
-        <div className="relative w-30 h-30">
+        <div className="relative w-32 h-32">
             <Image
                 src={imageUrl}
                 alt="プロフィール画像"

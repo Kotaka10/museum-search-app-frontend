@@ -39,7 +39,7 @@ export default function EditUserName() {
                 body: JSON.stringify({ userName })
             });
             if (res.ok) {
-                setMessage("ユーザー名を更新しました。再ログインする際は新しいユーザー名でログインしてください。");
+                setMessage("ユーザー名を更新しました。");
             } else {
                 setMessage("更新に失敗しました。");
             }

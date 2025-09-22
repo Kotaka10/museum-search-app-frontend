@@ -24,7 +24,7 @@ export default function LoginPage() {
             
             if (!res.ok) {
                 const errorText = await res.text();
-                throw new Error(errorText || "ログインに失敗しました");
+                throw new Error(errorText);
             }
 
             const data = await res.json();
