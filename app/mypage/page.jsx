@@ -17,7 +17,6 @@ export default function Mypage() {
     const currentUser = user?.email || null;
 
     useEffect(() => {
-        console.log("user is: " + user);
         if (!user) return;
 
         const fetchUserComments = async () => {
