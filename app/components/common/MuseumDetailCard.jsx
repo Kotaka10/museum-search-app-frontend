@@ -63,7 +63,7 @@ export default function MuseumDetailCard({ museum }) {
 						: null
 					}
 				/>
-				<DetailRow label="美術館名" value={museum.name} museumUrl={museum.museumUrl} />
+				<DetailRow label="会場" value={museum.name} museumUrl={museum.museumUrl} />
 				<DetailRow label="住所" value={museum.address}>
 					<MapWrapper
 						latitude={museum.latitude}
