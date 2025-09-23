@@ -75,7 +75,7 @@ export default function ChangePasswordPage() {
                     変更する
                 </button>
 
-                {message && <p className="text-center text-sky-400 mt-4">{message}</p>}
+                {message && <p className="text-center text-sky-500 mt-4">{message}</p>}
             </form>
         </div>
     );
