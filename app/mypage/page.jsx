@@ -17,6 +17,8 @@ export default function Mypage() {
     const currentUser = user?.email || null;
 
     useEffect(() => {
+        if (!user || !isLoading) return;
+
         const fetchUserComments = async () => {
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments/user`, {
@@ -34,8 +36,7 @@ export default function Mypage() {
             }
         };
 
-            if (!user || !isLoading) return;
-            fetchUserComments();
+        fetchUserComments();
     }, [user, isLoading]);
 
     return (

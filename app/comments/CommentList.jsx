@@ -55,6 +55,8 @@ export default function CommentList({ comments, setComments, currentUser }) {
     };
 
     useEffect(() => {
+        if (!user) return;
+        
         const fetchDisplayName = async () => {
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/display-name`, {
@@ -74,7 +76,7 @@ export default function CommentList({ comments, setComments, currentUser }) {
                 console.error('表示名の取得に失敗しました');
             }
         }
-        if (!user) return;
+
         fetchDisplayName();
     }, [user]);
 
