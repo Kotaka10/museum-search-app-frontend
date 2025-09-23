@@ -12,12 +12,13 @@ import EditEmail from "@/app/users/edit/EditEmail";
 import { FaCog } from 'react-icons/fa';
 
 export default function Mypage() {
-    const { user , isLoading} = useAuth();
+    const { user } = useAuth();
     const [comments, setComments] = useState([]);
     const currentUser = user?.email || null;
 
     useEffect(() => {
-        if (!user || !isLoading) return;
+        console.log("user is: " + user);
+        if (!user) return;
 
         const fetchUserComments = async () => {
             try {
@@ -37,7 +38,7 @@ export default function Mypage() {
         };
 
         fetchUserComments();
-    }, [user, isLoading]);
+    }, [user]);
 
     return (
         <div className="flex flex-col bg-gradient-to-tr from-teal-50 via-emerald-50 to-green-50">
