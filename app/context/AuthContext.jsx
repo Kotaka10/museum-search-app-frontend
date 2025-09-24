@@ -32,12 +32,6 @@ export function AuthProvider({ children }) {
         refresh();
     }, [refresh]);
 
-    useEffect(() => {
-        console.log(document.cookie);
-    }, []);
-
-    console.log(user, isLoading);
-
     return (
         <AuthContext.Provider value={{ user, isLoading, refresh }}>
             {children}
