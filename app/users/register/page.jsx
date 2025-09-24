@@ -13,7 +13,6 @@ export default function RegisterUserPage() {
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        setDebug("登録ボタン押された");
 
         if (password !== confirmPassword) {
             alert('パスワードが一致しません');
@@ -33,7 +32,7 @@ export default function RegisterUserPage() {
                 return;
             }
 
-    console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+            setDebug("API URL:", process.env.NEXT_PUBLIC_API_URL);
 
             const data = await res.json();
 
