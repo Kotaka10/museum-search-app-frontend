@@ -41,10 +41,10 @@ export default function RegisterUserPage() {
                 await refresh();
                 window.location.href = "/";
             } else {
-                setDebug("トークンが返されませんでした");
+                alert("トークンが返されませんでした");
             }
         } catch (err) {
-            setDebug('登録に失敗しました');
+            setDebug('会員登録に失敗しました');
         }
     };
 
