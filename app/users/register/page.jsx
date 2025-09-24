@@ -46,6 +46,8 @@ export default function RegisterUserPage() {
         }
     };
 
+    console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+
     return (
         <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-indigo-100 via-blue-100 to-sky-100">
             <form onSubmit={handleRegister} className="max-w-72 sm:max-w-md mx-auto mt-10">
