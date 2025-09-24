@@ -9,7 +9,6 @@ export default function RegisterUserPage() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [userName, setUserName] = useState('');
     const { refresh } = useAuth();
-    const [debug, setDebug] = useState("");
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -32,8 +31,6 @@ export default function RegisterUserPage() {
                 return;
             }
 
-            console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
-
             const data = await res.json();
 
             if (data.token){
@@ -51,7 +48,6 @@ export default function RegisterUserPage() {
         <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-indigo-100 via-blue-100 to-sky-100">
             <form onSubmit={handleRegister} className="max-w-72 sm:max-w-md mx-auto mt-10">
                 <h1 className="text-2xl font-bold mb-4">会員登録</h1>
-            <p className="text-red-500 mt-4">{debug}</p>
                 <input
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
