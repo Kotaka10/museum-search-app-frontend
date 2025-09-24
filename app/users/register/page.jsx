@@ -51,6 +51,7 @@ export default function RegisterUserPage() {
         <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-indigo-100 via-blue-100 to-sky-100">
             <form onSubmit={handleRegister} className="max-w-72 sm:max-w-md mx-auto mt-10">
                 <h1 className="text-2xl font-bold mb-4">会員登録</h1>
+            <p className="text-red-500 mt-4">{debug}</p>
                 <input
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -85,7 +86,6 @@ export default function RegisterUserPage() {
                 />
                 <button type="submit" className="w-full bg-orange-600 text-white p-2 rounded">登録</button>
             </form>
-            <p className="text-red-500 mt-4">{debug}</p>
         </div>
     );
 }
