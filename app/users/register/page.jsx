@@ -9,9 +9,11 @@ export default function RegisterUserPage() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [userName, setUserName] = useState('');
     const { refresh } = useAuth();
+    const [debug, setDebug] = useState("");
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        setDebug("登録ボタン押された");
 
         if (password !== confirmPassword) {
             alert('パスワードが一致しません');
@@ -25,22 +27,24 @@ export default function RegisterUserPage() {
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include'
             });
+            setDebug("レスポンス status: " + res.status);
             if (!res.ok) {
                 const err = await res.json();
-                alert(err.message || "登録に失敗しました");
+                setDebug(err.message || "登録に失敗しました");
                 return;
             }
 
             const data = await res.json();
+            setDebug("受け取ったデータ: " + JSON.stringify(data));
 
             if (data.token){
                 await refresh();
                 window.location.href = "/";
             } else {
-                alert("トークンが返されませんでした");
+                setDebug("トークンが返されませんでした");
             }
         } catch (err) {
-            alert('登録に失敗しました');
+            setDebug('登録に失敗しました');
         }
     };
 
@@ -82,6 +86,7 @@ export default function RegisterUserPage() {
                 />
                 <button type="submit" className="w-full bg-orange-600 text-white p-2 rounded">登録</button>
             </form>
+            <p className="text-red-500 mt-4">{debug}</p>
         </div>
     );
 }
