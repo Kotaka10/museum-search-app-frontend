@@ -33,6 +33,8 @@ export default function RegisterUserPage() {
                 return;
             }
 
+    console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+
             const data = await res.json();
 
             if (data.token){
@@ -45,8 +47,6 @@ export default function RegisterUserPage() {
             alert("API URL:", process.env.NEXT_PUBLIC_API_URL);
         }
     };
-
-    console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
 
     return (
         <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-indigo-100 via-blue-100 to-sky-100">
