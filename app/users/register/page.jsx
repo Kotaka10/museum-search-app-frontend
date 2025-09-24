@@ -44,7 +44,8 @@ export default function RegisterUserPage() {
                 alert("トークンが返されませんでした");
             }
         } catch (err) {
-            setDebug('会員登録に失敗しました');
+            alert("fetch失敗: " + err.message);
+            console.error("詳細エラー", err);
         }
     };
 
