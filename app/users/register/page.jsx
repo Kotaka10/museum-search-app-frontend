@@ -32,7 +32,7 @@ export default function RegisterUserPage() {
                 return;
             }
 
-            setDebug("API URL:", process.env.NEXT_PUBLIC_API_URL);
+            console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
 
             const data = await res.json();
 
