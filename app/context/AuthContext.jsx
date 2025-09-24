@@ -8,8 +8,6 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    console.log(document.cookie)
-
     const refresh = useCallback(async () => {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/mypage`, {
@@ -33,6 +31,10 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         refresh();
     }, [refresh]);
+
+    useEffect(() => {
+        console.log(document.cookie);
+    }, []);
 
     console.log(user, isLoading);
 
