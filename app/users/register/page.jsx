@@ -27,15 +27,13 @@ export default function RegisterUserPage() {
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include'
             });
-            setDebug("レスポンス status: " + res.status);
             if (!res.ok) {
                 const err = await res.json();
-                setDebug(err.message || "登録に失敗しました");
+                alert(err.message || "登録に失敗しました");
                 return;
             }
 
             const data = await res.json();
-            setDebug("受け取ったデータ: " + JSON.stringify(data));
 
             if (data.token){
                 await refresh();
@@ -44,8 +42,7 @@ export default function RegisterUserPage() {
                 alert("トークンが返されませんでした");
             }
         } catch (err) {
-            alert("fetch失敗: " + err.message);
-            console.error("詳細エラー", err);
+            alert("API URL:", process.env.NEXT_PUBLIC_API_URL);
         }
     };
 
