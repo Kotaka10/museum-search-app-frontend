@@ -8,7 +8,7 @@ export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
-    const { refresh, token } = useAuth();
+    const { token } = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -16,10 +16,10 @@ export default function LoginPage() {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/login`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization": `Bearer ${token}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ email, password }),
+                credentials: 'include',
             });
             
             if (!res.ok) {
@@ -28,11 +28,9 @@ export default function LoginPage() {
             }
 
             const data = await res.json();
-            alert("data is: ", data);
+            alert("ログイン成功 ", data);
             
             if (data) {
-                localStorage.setItem("token", data.token);
-                login(data.token, data.user);
                 router.push("/");
             } else {
                 alert("トークンまたはユーザーデータが返されませんでした");
