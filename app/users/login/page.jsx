@@ -23,11 +23,12 @@ export default function LoginPage() {
             
             if (!res.ok) {
                 const errorText = await res.text();
+                console.error("Login failed:", errorText);
                 throw new Error(errorText);
             }
 
             const data = await res.json();
-            alert("ログイン成功 ", data);
+            console.log(data);
             
             if (data?.token && data?.user) {
                 login(data.token, data.user);
@@ -36,7 +37,7 @@ export default function LoginPage() {
                 alert("トークンまたはユーザーデータが返されませんでした");
             }
         } catch (err) {
-            alert("ログインに失敗しました");
+            alert("ログインに失敗しました",  + err.message);
         }
     };
 
