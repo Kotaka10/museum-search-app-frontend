@@ -8,7 +8,7 @@ export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
-    const { refresh } = useAuth();
+    const { refresh, token } = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -17,6 +17,7 @@ export default function LoginPage() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({ email, password }),
             });
