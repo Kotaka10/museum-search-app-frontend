@@ -12,7 +12,9 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         const savedToken = localStorage.getItem("token");
         if (savedToken) {
-        setToken(savedToken);
+            setToken(savedToken);
+        } else {
+            setIsLoading(false);
         }
     }, []);
 
@@ -38,6 +40,7 @@ export function AuthProvider({ children }) {
             const data = await res.json();
             setUser(data);
         } catch (err) {
+            console.error("ユーザー情報の取得に失敗しました:", err);
             setUser(null);
             setToken(null);
             localStorage.removeItem("token");
@@ -48,7 +51,7 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         refresh();
-    }, [refresh]);
+    }, [refresh, token]);
 
     const login = (token, userData) => {
         setToken(token);

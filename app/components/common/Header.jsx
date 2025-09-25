@@ -1,6 +1,6 @@
 'use client';
 
-import { logout } from '@/lib/auth';
+import { logoutAPI } from '@/lib/auth';
 import { useAuth } from '@/app/context/AuthContext';
 import SearchMuseums from '@/app/components/ui/SearchMuseums';
 import MobileMenu from '@/app/components/common/MobileMenu';
@@ -29,7 +29,7 @@ export default function Header() {
                 {user ? (
                     <>
                         <Link href="/mypage" className="text-orange-500 hover:underline">マイページ</Link>
-                        <button onClick={() => logout(refresh)} className="text-orange-500 hover:underline">
+                        <button onClick={() => logoutAPI(refresh)} className="text-orange-500 hover:underline">
                             ログアウト
                         </button>
                     </>

@@ -8,7 +8,7 @@ export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
-    const { token } = useAuth();
+    const { login } = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -19,7 +19,6 @@ export default function LoginPage() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ email, password }),
-                credentials: 'include',
             });
             
             if (!res.ok) {
@@ -30,7 +29,8 @@ export default function LoginPage() {
             const data = await res.json();
             alert("ログイン成功 ", data);
             
-            if (data) {
+            if (data?.token && data?.user) {
+                login(data.token, data.user);
                 router.push("/");
             } else {
                 alert("トークンまたはユーザーデータが返されませんでした");

@@ -25,10 +25,9 @@ export default function RegisterUserPage() {
                 headers: { 
                     'Content-Type': 'application/json',
                  },
-                 credentials: 'include',
             });
             if (!res.ok) {
-                const err = await res.json();
+                const err = await res.text();
                 alert(err.message || "登録に失敗しました");
                 return;
             }
@@ -36,6 +35,7 @@ export default function RegisterUserPage() {
             const data = await res.json();
 
             if (data.token){
+                localStorage.setItem("token", data.token);
                 await refresh();
                 window.location.href = "/";
             } else {
