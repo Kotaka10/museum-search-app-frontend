@@ -1,12 +1,14 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import { useAuth } from '@/app/context/AuthContext';
 
 export default function AdminUserPage() {
-  const [users, setUsers] = useState([])
-  const [keyword, setKeyword] = useState('')
-  const [page, setPage] = useState(0)
-  const [totalPages, setTotalPages] = useState(0)
+  const [users, setUsers] = useState([]);
+  const [keyword, setKeyword] = useState('');
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const { token } = useAuth();
 
   useEffect(() => {
     fetchUsers()
@@ -14,7 +16,9 @@ export default function AdminUserPage() {
 
   const fetchUsers = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/users/search?keyword=${keyword}&page=${page}&size=10`, {
-      credentials: 'include',
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
     });
     const data = await res.json()
     setUsers(data.content)
@@ -31,7 +35,9 @@ export default function AdminUserPage() {
     if (!confirm('このユーザーを削除しますか？')) return
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/users/${id}`, {
       method: 'DELETE',
-      credentials: 'include',
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
     })
     if (res.ok) {
       fetchUsers()

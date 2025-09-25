@@ -12,7 +12,7 @@ import EditEmail from "@/app/users/edit/EditEmail";
 import { FaCog } from 'react-icons/fa';
 
 export default function Mypage() {
-    const { user } = useAuth();
+    const { user, token } = useAuth();
     const [comments, setComments] = useState([]);
     const currentUser = user?.email || null;
 
@@ -23,7 +23,9 @@ export default function Mypage() {
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments/user`, {
                     method: 'GET',
-                    credentials: 'include',
+                    headers: {
+						"Authorization": `Bearer ${token}`
+					},
                 });
                 if (res.ok) {
                     const data = await res.json();

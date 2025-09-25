@@ -1,15 +1,20 @@
 'use client';
 
 import { useEffect, useState } from "react";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function ApprovedMuseumsPage() {
     const [approvedMuseums, setApprovedMuseums] = useState([]);
+    const { token } = useAuth();
 
     useEffect(() => {
          const getApprovedMuseums = async () => {
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/museums/approved`, {
-                    credentials: 'include',
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+
                 });
                 if (res.ok) {
                     const data = await res.json();

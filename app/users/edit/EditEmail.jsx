@@ -8,14 +8,16 @@ export default function EditEmail() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const router = useRouter();
-    const { refresh } = useAuth();
+    const { refresh, token } = useAuth();
 
     useEffect(() => {
         const fetchEmail = async () => {
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/email`, {
                     method: 'GET',
-                    credentials: 'include',
+                    headers: {
+						"Authorization": `Bearer ${token}`
+					},
                 });
                 if (res.ok) {
                     const data = await res.text();
@@ -36,10 +38,10 @@ export default function EditEmail() {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/email`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+					"Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({ email }),
-                credentials: 'include',
             });
             if (res.ok) {
                 refresh();

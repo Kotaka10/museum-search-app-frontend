@@ -6,13 +6,29 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    useEffect(() => {
+        const savedToken = localStorage.getItem("token");
+        if (savedToken) {
+        setToken(savedToken);
+        }
+    }, []);
+
     const refresh = useCallback(async () => {
+        if (!token) {
+            setUser(null);
+            setIsLoading(false);
+            return;
+        }
+            
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/mypage`, {
                 method: 'GET',
-                credentials: 'include',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
 
             if (!res.ok) {
@@ -23,6 +39,8 @@ export function AuthProvider({ children }) {
             setUser(data);
         } catch (err) {
             setUser(null);
+            setToken(null);
+            localStorage.removeItem("token");
         } finally {
             setIsLoading(false);
         }
@@ -32,8 +50,20 @@ export function AuthProvider({ children }) {
         refresh();
     }, [refresh]);
 
+    const login = (token, userData) => {
+        setToken(token);
+        localStorage.setItem("token", token);
+        setUser(userData);
+    };
+
+    const logout = () => {
+        setToken(null);
+        localStorage.removeItem("token");
+        setUser(null);
+    };
+
     return (
-        <AuthContext.Provider value={{ user, isLoading, refresh }}>
+        <AuthContext.Provider value={{ user, token, login, logout, isLoading, refresh }}>
             {children}
         </AuthContext.Provider>
     );

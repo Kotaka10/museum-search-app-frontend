@@ -9,14 +9,16 @@ export default function CommentList({ comments, setComments, currentUser }) {
     const [editingId, setEditingId] = useState(null);
     const [editedContent, setEditedContent] = useState('');
     const [userName, setUserName] = useState('');
-    const { user } = useAuth();
+    const { token, user } = useAuth();
 
     const handleDelete = async (commentId) => {
         if (!window.confirm('このコメントを削除しますか？')) return;
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments/${commentId}`, {
             method: 'DELETE',
-            credentials: 'include',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
         });
 
         if (res.ok) {
@@ -39,9 +41,9 @@ export default function CommentList({ comments, setComments, currentUser }) {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments/${commentId}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`
             },
-            credentials: 'include',
             body: JSON.stringify({ content: editedContent }),
         });
 
@@ -62,9 +64,9 @@ export default function CommentList({ comments, setComments, currentUser }) {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/display-name`, {
                     method: 'GET',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${token}`
                     },
-                    credentials: 'include',
                 });
                 if (res.ok) {
                     const data = await res.text();

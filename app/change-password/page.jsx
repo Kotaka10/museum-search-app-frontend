@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext"; 
 
 export default function ChangePasswordPage() {
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [message, setMessage] = useState("");
+    const { token } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,12 +23,12 @@ export default function ChangePasswordPage() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     oldPassword: currentPassword,
                     newPassword: newPassword,
                 }),
-                credentials: 'include',
             });
 
             if (!res.ok) {

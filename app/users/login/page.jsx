@@ -19,7 +19,6 @@ export default function LoginPage() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ email, password }),
-                credentials: 'include',
             });
             
             if (!res.ok) {
@@ -29,11 +28,12 @@ export default function LoginPage() {
 
             const data = await res.json();
             
-            if (data){
-                await refresh();
+            if (data.token && data.user) {
+                localStorage.setItem("token", data.token);
+                login(data.token, data.user);
                 router.push("/");
             } else {
-                alert("トークンが返されませんでした");
+                alert("トークンまたはユーザーデータが返されませんでした");
             }
         } catch (err) {
             alert("ログインに失敗しました");

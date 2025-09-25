@@ -42,7 +42,7 @@ export default function Header() {
                 <MobileMenu />
             </div>
             <p>user: {user ? user.userName : "null"}</p>
-<p>isLoading: {isLoading.toString()}</p>
+            <p>isLoading: {isLoading.toString()}</p>
         </header>
     );
 }

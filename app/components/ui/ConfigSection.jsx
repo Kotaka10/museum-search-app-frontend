@@ -9,7 +9,7 @@ import { useAuth } from '@/app/context/AuthContext';
 export default function ConfigSection() {
     const router = useRouter();
     const { refresh } = useAuth();
-    const { user } = useAuth();
+    const { user, token } = useAuth();
 
     const handleDeleteAccount = async () => {
         const confirmed = window.confirm("本当に退会しますか？この操作は取り消せません");
@@ -20,8 +20,9 @@ export default function ConfigSection() {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`
                 },
-                credentials: 'include',
+                
             });
 
             if (!res.ok) {

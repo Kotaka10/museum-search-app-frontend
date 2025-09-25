@@ -2,10 +2,12 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function ChangeProfileImage({ userId }) {
     const [imageUrl, setImageUrl] = useState('/images/profile/profile.jpg');
     const fileInputRef = useRef(null);
+    const { token } = useAuth();
 
     const handleImageClick = () => {
         fileInputRef.current.click();
@@ -15,7 +17,9 @@ export default function ChangeProfileImage({ userId }) {
         if (!userId) return;
 
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${userId}/profile-image`, {
-            credentials: 'include',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
         })
             .then(res => {
                 if (!res.ok) throw new Error('プロフィール画像取得に失敗しました');
@@ -48,7 +52,9 @@ export default function ChangeProfileImage({ userId }) {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/profile-image`, {
                 method: 'POST',
-                credentials: 'include',
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                },
                 body: formData,
             });
 

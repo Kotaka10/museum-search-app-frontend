@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import { useAuth } from '@/app/context/AuthContext';
 
 function InputField({ label, name, type = 'text', value, onChange }) {
   return (
@@ -22,6 +23,7 @@ export default function EditMuseumPage() {
 	const router = useRouter();
 	const params = useParams();
 	const id = Array.isArray(params?.id) ? params.id[0] : params?.id;
+	const { token } = useAuth();
 
 	const [form, setForm] = useState({
 		name: '',
@@ -48,7 +50,9 @@ export default function EditMuseumPage() {
 		const fetchMuseum = async () => {
 			try {
 				const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/${id}`, {
-					credentials: 'include',
+					headers: {
+						"Authorization": `Bearer ${token}`
+					},
 				});
 				if (!res.ok) throw new Error('美術館の取得に失敗しました');
 				const data = await res.json();
@@ -76,7 +80,9 @@ export default function EditMuseumPage() {
 			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/${id}`, {
 				method: 'PUT',
 				headers: { 'Content-Type': 'application/json' },
-				credentials: 'include',
+				headers: {
+					"Authorization": `Bearer ${token}`
+				},
 				body: JSON.stringify(form),
 			});
 

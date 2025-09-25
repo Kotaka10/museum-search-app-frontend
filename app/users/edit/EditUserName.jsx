@@ -1,17 +1,21 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useAuth } from '@/app/context/AuthContext';
 
 export default function EditUserName() {
     const [userName, setUserName] = useState('');
     const [message, setMessage] = useState('');
+    const { token } = useAuth();
 
     useEffect(() => {
         const fetchUserName = async () => {
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/display-name`, {
                     method: 'GET',
-                    credentials: 'include',
+                    headers: {
+						"Authorization": `Bearer ${token}`
+					},
                 });
 
                 if (res.ok) {
@@ -32,9 +36,9 @@ export default function EditUserName() {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/display-name`, {
                 method: 'PUT',
-                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
+					"Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({ userName })
             });

@@ -1,15 +1,19 @@
 'use client';
 
 import { useEffect, useState } from "react";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function PendingMuseumsPage() {
     const [museums, setMuseums] = useState([]);
+    const { token } = useAuth();
 
     useEffect(() => {
         const fetchPendingMuseums = async () => {
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/museums/pending`, {
-                    credentials: 'include',
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    },
                 });
 
                 if (res.ok) {
@@ -27,7 +31,9 @@ export default function PendingMuseumsPage() {
     const handleApprove = async (id) => {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/museums/${id}/approve`, {
             method: 'PUT',
-            credentials: 'include',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
         });
 
         if (res.ok) {
@@ -40,7 +46,9 @@ export default function PendingMuseumsPage() {
     const handleReject = async (id) => {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/museums/${id}/reject`, {
             method: 'PUT',
-            credentials: 'include',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
         });
 
         if (res.ok) {

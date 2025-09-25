@@ -3,14 +3,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useAuth } from '@/app/context/AuthContext';
 
 export default function GardenImageLayout() {
 	const [museums, setMuseums] = useState([]);
+	const { token } = useAuth();
 
 	useEffect(() => {
 		const fetchMuseums = async () => {
 		    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/all`, {
-			  credentials: 'include',
+			  headers: {
+                "Authorization": `Bearer ${token}`
+            },
 		    });
 		    if (!res.ok) {
 			  throw new Error('美術館の取得に失敗しました');

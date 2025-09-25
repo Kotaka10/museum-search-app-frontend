@@ -8,7 +8,7 @@ export default function RegisterUserPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [userName, setUserName] = useState('');
-    const { refresh } = useAuth();
+    const { refresh, token } = useAuth();
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -22,8 +22,10 @@ export default function RegisterUserPage() {
             const res = await fetch("https://museum-research-app-backend.onrender.com/api/users/register", {
                 method: 'POST',
                 body: JSON.stringify({ email, password, userName }),
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include'
+                headers: { 
+                    'Content-Type': 'application/json',
+					"Authorization": `Bearer ${token}`
+                 },
             });
             if (!res.ok) {
                 const err = await res.json();

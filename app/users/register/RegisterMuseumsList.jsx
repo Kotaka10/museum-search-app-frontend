@@ -3,15 +3,19 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaLandmark } from "react-icons/fa";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function RegisterMuseumsList() {
     const [museums, setMuseums] = useState([]);
+    const { token } = useAuth();
 
     useEffect(() => {
         const fetchMuseums = async () => {
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/mypage`, {
-                    credentials: "include",
+                    headers: {
+						"Authorization": `Bearer ${token}`
+					},
             });
                 if (res.ok) {
                     const data = await res.json();

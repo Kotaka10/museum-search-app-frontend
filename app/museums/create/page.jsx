@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useAuth } from "@/app/context/AuthContext";
 
 function InputField({ label, name, type = "text", placeholder, value, onChange }) {
     return (
@@ -24,6 +25,7 @@ function InputField({ label, name, type = "text", placeholder, value, onChange }
 export default function CreateMuseumPage() {
     const router = useRouter();
     const [error, setError] = useState('');
+    const { token } = useAuth();
     const [form, setForm] = useState({
         name: '',
         address: '',
@@ -59,8 +61,8 @@ export default function CreateMuseumPage() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+					"Authorization": `Bearer ${token}`
                 },
-                credentials: 'include',
                 body: JSON.stringify(form),
             });
 

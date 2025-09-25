@@ -21,9 +21,9 @@ export default function CommentForm({ museumId, onCommentAdded, currentUser }) {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`,                
                 },
-                credentials: 'include',
                 body: JSON.stringify({ museumId, content }),
             });
 

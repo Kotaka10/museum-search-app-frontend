@@ -2,15 +2,24 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function AdminMuseumPage() {
     const [museums, setMuseums] = useState([]);
+    const { token } = useAuth();
 
     useEffect(() => {
         const fetchData = async () => {
+            if (!token) {
+                console.error("認証トークンがありません");
+                return;
+            }
+
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/all`, {
-                    credentials: 'include',
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
                 })
 
                 if (res.ok) {
@@ -30,7 +39,9 @@ export default function AdminMuseumPage() {
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/${id}`, {
             method: 'DELETE',
-            credentials: 'include',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
         });
 
         if (res.ok) {

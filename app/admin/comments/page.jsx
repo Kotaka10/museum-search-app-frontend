@@ -1,46 +1,70 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useAuth } from '@/app/context/AuthContext';
 
 export default function AdminCommentPage() {
-  const [comments, setComments] = useState([])
-  const [keyword, setKeyword] = useState('')
-  const [page, setPage] = useState(0)
-  const [totalPages, setTotalPages] = useState(0)
+    const [comments, setComments] = useState([]);
+    const [keyword, setKeyword] = useState('');
+    const [page, setPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
+    const { token } = useAuth();
 
-  const fetchComments = async () => {
-    const url = keyword
-      ? `${process.env.NEXT_PUBLIC_API_URL}/api/admin/comments/search?keyword=${encodeURIComponent(keyword)}&page=${page}&size=10`
-      : `${process.env.NEXT_PUBLIC_API_URL}/api/admin/comments?page=0&size=10`
+    const fetchComments = async () => {
+        if (!token) {
+            console.error("認証トークンがありません");
+            return;
+        }
 
-    const res = await fetch(url, { credentials: 'include' });
+        const url = keyword
+            ? `${process.env.NEXT_PUBLIC_API_URL}/api/admin/comments/search?keyword=${encodeURIComponent(keyword)}&page=${page}&size=10`
+            : `${process.env.NEXT_PUBLIC_API_URL}/api/admin/comments?page=0&size=10`
 
-    if (!res.ok) {
-        console.error('コメント取得失敗', res.status)
-        return
+        try {
+            const res = await fetch(url, { 
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (!res.ok) {
+                console.error('コメント取得失敗', res.status)
+                return
+            }
+
+            const data = await res.json()
+            setComments(data.content)
+            setTotalPages(data.totalPages)
+        } catch (err) {
+            console.error("APIエラー: ", err);
+        }
     }
 
-    const data = await res.json()
-    setComments(data.content)
-    setTotalPages(data.totalPages)
-  }
 
   useEffect(() => {
     fetchComments()
-  }, [page])
+  }, [page, keyword]);
 
   const handleDelete = async (id) => {
-    if (!confirm('本当に削除しますか？')) return
+        if (!confirm('本当に削除しますか？')) return
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/comments/${id}`, {
-      method: 'DELETE',
-      credentials: 'include',
-    })
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/comments/${id}`, {
+            method: 'DELETE',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+            })
 
-    if (res.ok) {
-        fetchComments()
+            if (res.ok) {
+                fetchComments()
+            }
+        } catch (err) {
+            console.error("削除時エラー: ", err);
+        }
     }
-  }
+
 
   return (
     <div className="p-6">

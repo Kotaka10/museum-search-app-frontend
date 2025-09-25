@@ -1,14 +1,18 @@
 'use client';
 
+import { useAuth } from "@/app/context/AuthContext";
 import { useEffect, useState } from "react";
 
 export default function DeleteMuseum() {
     const [museums, setMuseums] = useState([]);
+    const { token } = useAuth();
 
     useEffect(() => {
         const fetchMuseums = async () => {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/all`, {
-                credentials: 'include',
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                },
             });
 
             if (res.ok) {
@@ -28,7 +32,9 @@ export default function DeleteMuseum() {
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/${id}`, {
             method: 'DELETE',
-            credentials: 'include',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
         });
 
         if (res.status === 204) {

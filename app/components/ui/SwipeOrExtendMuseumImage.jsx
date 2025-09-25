@@ -4,11 +4,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useAuth } from '@/app/context/AuthContext';
 
 export default function SwipeOrFocusMuseumImage() {
   const [museums, setMuseums] = useState([]);
   const [images, setImages] = useState([]);
   const [swipeDirection, setSwipeDirection] = useState(0);
+  const { token } = useAuth();
 
   const handleSwipe = (direction) => {
     setSwipeDirection(direction);
@@ -28,7 +30,9 @@ export default function SwipeOrFocusMuseumImage() {
   useEffect(() => {
     const fetchMuseums = async () => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/all?t=${Date.now()}`, {
-        credentials: 'include',
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
         cache: "no-store",
       });
 
