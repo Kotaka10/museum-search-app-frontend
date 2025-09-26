@@ -47,7 +47,7 @@ export default function ChangePasswordPage() {
 
     return (
         <div className="min-h-[80vh] flex items-center  bg-gradient-to-br from-amber-100 via-orange-100 to-red-100">
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="max-w-72 sm:max-w-md mx-auto mt-10">
                 <h1 className="text-2xl font-bold text-center p-4">パスワード変更</h1>
                 <input
                     type="password"
