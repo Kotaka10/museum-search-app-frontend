@@ -67,6 +67,7 @@ export default function ImageCarousel() {
                                     museum.exhibitionImage !== "https://museum-search-app-theta.vercel.app/images/exhibition-image/kawa.PNG" &&
                                     museum.exhibitionImage !== "https://museum-search-app-theta.vercel.app/images/exhibition-image/koishikawa.JPG" &&
                                     museum.exhibitionImage !== "https://museum-search-app-theta.vercel.app/images/exhibition-image/rikugien.JPG" &&
+                                    museum.exhibitionImage !== "https://museum-search-app-theta.vercel.app/images/exhibition-image/1560030.jpg" &&
                                     museum.exhibitionImage !== "" &&
                                     museum.exhibitionImage !== null;
             if (exhibitionImage) {

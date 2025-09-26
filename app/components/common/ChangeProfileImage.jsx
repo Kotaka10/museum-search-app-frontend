@@ -75,6 +75,10 @@ export default function ChangeProfileImage({ userId }) {
         }
     };
 
+    if (loading) {
+        return <div className="w-[90px] h-[90px] md:w-[100px] md:h-[100px] rounded-full bg-gray-200 animate-pulse"></div>; 
+    }
+
     return (
         <div>
             <Image
