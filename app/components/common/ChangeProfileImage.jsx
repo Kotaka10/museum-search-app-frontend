@@ -75,9 +75,22 @@ export default function ChangeProfileImage({ userId }) {
         }
     };
 
-    if (loading) {
-        return <div className="w-[90px] h-[90px] md:w-[100px] md:h-[100px] rounded-full bg-gray-200 animate-pulse"></div>; 
+    const defaultImage = '/images/profile/profile.jpg';
+    const blurImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHUlEQVQYV2NkYGBg+M+ABMRg0CDAwMDwPAAADDAAGs0xwVAAAAAElFTkSuQmCC';
+
+    if (!imageUrl) {
+        return (
+            <Image
+                src={defaultImage}
+                alt="プロフィール画像"
+                fill
+                className="rounded-full object-cover border"
+                placeholder="blur"
+                blurDataURL={blurImage}
+            />
+        );
     }
+
 
     return (
         <div>
