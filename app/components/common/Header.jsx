@@ -7,7 +7,7 @@ import MobileMenu from '@/app/components/common/MobileMenu';
 import Link from 'next/link';
 
 export default function Header() {
-    const { user, token, isLoading, refresh, logout } = useAuth();
+    const { user, isLoading, logout } = useAuth();
 
     if (isLoading) {
         return (
@@ -29,7 +29,7 @@ export default function Header() {
                 {user ? (
                     <>
                         <Link href="/mypage" className="text-orange-500 hover:underline">マイページ</Link>
-                        <button onClick={() => logoutAPI(logout, refresh)} className="text-orange-500 hover:underline">
+                        <button onClick={() => logoutAPI(logout)} className="text-orange-500 hover:underline">
                             ログアウト
                         </button>
                     </>

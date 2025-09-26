@@ -9,7 +9,7 @@ import { useAuth } from '@/app/context/AuthContext';
 export default function ConfigSection() {
     const router = useRouter();
     const { refresh } = useAuth();
-    const { user, token } = useAuth();
+    const { user, token, logout } = useAuth();
 
     const handleDeleteAccount = async () => {
         const confirmed = window.confirm("本当に退会しますか？この操作は取り消せません");
@@ -50,7 +50,7 @@ export default function ConfigSection() {
                     <p className="mt-2 text-gray-900">画像をクリックして変更する</p>
                 </div>
                 <div className="flex flex-col gap-3">
-                    <button onClick={() => logoutAPI(logout, refresh)} className="text-left text-orange-400 hover:underline">
+                    <button onClick={() => logoutAPI(logout)} className="text-left text-orange-400 hover:underline">
                         ログアウト
                     </button>
                     <button onClick={handleDeleteAccount} className="text-left text-red-600 hover:underline">
