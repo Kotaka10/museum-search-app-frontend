@@ -5,7 +5,6 @@ import { useAuth } from '@/app/context/AuthContext';
 import SearchMuseums from '@/app/components/ui/SearchMuseums';
 import MobileMenu from '@/app/components/common/MobileMenu';
 import Link from 'next/link';
-import { logoutAPI } from '@/lib/auth';
 
 export default function Header() {
     const { user, token, isLoading, refresh } = useAuth();
