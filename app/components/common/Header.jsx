@@ -29,7 +29,7 @@ export default function Header() {
                 {user ? (
                     <>
                         <Link href="/mypage" className="text-orange-500 hover:underline">マイページ</Link>
-                        <button onClick={() => logoutAPI(token, logout, refresh)} className="text-orange-500 hover:underline">
+                        <button onClick={() => logoutAPI(logout, refresh)} className="text-orange-500 hover:underline">
                             ログアウト
                         </button>
                     </>
