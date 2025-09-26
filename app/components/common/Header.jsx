@@ -5,9 +5,10 @@ import { useAuth } from '@/app/context/AuthContext';
 import SearchMuseums from '@/app/components/ui/SearchMuseums';
 import MobileMenu from '@/app/components/common/MobileMenu';
 import Link from 'next/link';
+import { logoutAPI } from '@/lib/auth';
 
 export default function Header() {
-    const { user, isLoading, refresh } = useAuth();
+    const { user, token, isLoading, refresh } = useAuth();
 
     if (isLoading) {
         return (
@@ -29,7 +30,7 @@ export default function Header() {
                 {user ? (
                     <>
                         <Link href="/mypage" className="text-orange-500 hover:underline">マイページ</Link>
-                        <button onClick={() => logoutAPI(refresh)} className="text-orange-500 hover:underline">
+                        <button onClick={() => logoutAPI(token, logout, refresh)} className="text-orange-500 hover:underline">
                             ログアウト
                         </button>
                     </>

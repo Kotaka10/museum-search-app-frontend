@@ -50,7 +50,7 @@ export default function ConfigSection() {
                     <p className="mt-2 text-gray-900">画像をクリックして変更する</p>
                 </div>
                 <div className="flex flex-col gap-3">
-                    <button onClick={() => logoutAPI(refresh)} className="text-left text-orange-400 hover:underline">
+                    <button onClick={() => logoutAPI(token, logout, refresh)} className="text-left text-orange-400 hover:underline">
                         ログアウト
                     </button>
                     <button onClick={handleDeleteAccount} className="text-left text-red-600 hover:underline">
