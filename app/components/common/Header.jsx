@@ -7,7 +7,7 @@ import MobileMenu from '@/app/components/common/MobileMenu';
 import Link from 'next/link';
 
 export default function Header() {
-    const { user, token, isLoading, refresh } = useAuth();
+    const { user, token, isLoading, refresh, logout } = useAuth();
 
     if (isLoading) {
         return (
