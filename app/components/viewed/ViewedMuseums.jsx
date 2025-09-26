@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { FaHistory } from 'react-icons/fa';
@@ -9,7 +8,6 @@ import { FaHistory } from 'react-icons/fa';
 export default function ViewedMuseums() {
     const [history, setHistory] = useState([]);
     const [error, setError] = useState('');
-    const router = useRouter();
 
     useEffect(() => {
         const fetchViewedHistory = async () => {

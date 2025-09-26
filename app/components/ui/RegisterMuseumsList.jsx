@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaLandmark } from "react-icons/fa";
 import { useAuth } from "@/app/context/AuthContext";
+import DeleteMuseum from "@/app/museums/delete/DeleteMuseum";
 
 export default function RegisterMuseumsList() {
     const [museums, setMuseums] = useState([]);
@@ -57,6 +58,7 @@ export default function RegisterMuseumsList() {
                     ))}
                 </ul>
             )}
+            <DeleteMuseum />
         </div>
     );
 }

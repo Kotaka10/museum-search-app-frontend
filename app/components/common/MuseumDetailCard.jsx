@@ -4,8 +4,8 @@ import MuseumCommentSection from '@/app/comments/MuseumCommentSection';
 import DetailRow from '@/app/components/common/DetailRow';
 import MapWrapper from '@/app/wrapper/MapWrapper';
 import { useAuth } from '@/app/context/AuthContext';
-import ViewedMuseums from '@/app/components/ui/ViewedMuseums';
-import LocalViewedMuseums from '@/app/components/ui/LocalViewedMuseums';
+import ViewedMuseums from '@/app/components/viewed/ViewedMuseums';
+import LocalViewedMuseums from '@/app/components/viewed/LocalViewedMuseums';
 import Link from 'next/link';
 import Image from 'next/image';
 

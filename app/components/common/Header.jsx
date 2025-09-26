@@ -1,6 +1,6 @@
 'use client';
 
-import logoutAPI from '@/lib/auth';
+import { logoutAPI } from '@/lib/auth';
 import { useAuth } from '@/app/context/AuthContext';
 import SearchMuseums from '@/app/components/ui/SearchMuseums';
 import MobileMenu from '@/app/components/common/MobileMenu';
