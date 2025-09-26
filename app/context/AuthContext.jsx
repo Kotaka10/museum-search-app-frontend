@@ -47,7 +47,7 @@ export function AuthProvider({ children }) {
         } finally {
             setIsLoading(false);
         }
-    }, []);
+    }, [token]);
 
     useEffect(() => {
         refresh();
@@ -57,6 +57,7 @@ export function AuthProvider({ children }) {
         setToken(token);
         localStorage.setItem("token", token);
         setUser(userData);
+        refresh();
     };
 
     const logout = () => {

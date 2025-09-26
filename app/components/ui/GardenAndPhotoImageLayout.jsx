@@ -28,7 +28,7 @@ export default function GardenImageLayout() {
 
 	return (
 		<div className="mb-2">
-			<h2 className="text-center text-3xl sm:text-5xl mt-12">庭園・写真館</h2>
+			<h2 className="text-center text-3xl sm:text-5xl mt-12">庭園・写真</h2>
       		<h3 className="text-center text-lg text-gray-600 mt-4 mx-2">画像をクリックすると詳細ページに遷移します</h3>
 			<div
 				className="
@@ -76,10 +76,10 @@ export default function GardenImageLayout() {
 					庭園を探す
 				</Link>
 				<Link
-					href={`/photos?photo=${encodeURIComponent("写真館")}`} 
+					href={`/photos?photo=${encodeURIComponent("写真")}`} 
 					className="text-orange-500 hover:text-blue-500 hover:cursor-pointer"
 				>
-					写真館を探す
+					写真を探す
 				</Link>
 			</div> 
 		</div>

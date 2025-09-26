@@ -5,8 +5,6 @@ import GardenAndPhotoImageLayout from '@/app/components/ui/GardenAndPhotoImageLa
 import ArtImageSwiper from '@/app/components/ui/ArtImageSwiper';
 
 export default async function MuseumHomePage() {
-  console.log("SERVER KEY:", process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
-
   return (
     <main>
       <ArtImageSwiper />
