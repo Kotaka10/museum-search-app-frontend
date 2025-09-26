@@ -7,7 +7,7 @@ import { useAuth } from "@/app/context/AuthContext";
 export default function ChangeProfileImage({ userId }) {
     const [imageUrl, setImageUrl] = useState('/images/profile/profile.jpg');
     const fileInputRef = useRef(null);
-    const { token } = useAuth();
+    const { token, loading } = useAuth();
 
     const handleImageClick = () => {
         fileInputRef.current.click();
