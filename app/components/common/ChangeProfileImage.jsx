@@ -78,28 +78,16 @@ export default function ChangeProfileImage({ userId }) {
     const defaultImage = '/images/profile/profile.jpg';
     const blurImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHUlEQVQYV2NkYGBg+M+ABMRg0CDAwMDwPAAADDAAGs0xwVAAAAAElFTkSuQmCC';
 
-    if (!imageUrl) {
-        return (
-            <Image
-                src={defaultImage}
-                alt="プロフィール画像"
-                fill
-                className="rounded-full object-cover border"
-                placeholder="blur"
-                blurDataURL={blurImage}
-            />
-        );
-    }
-
-
     return (
         <div>
             <Image
-                src={imageUrl}
+                src={imageUrl || defaultImage}
                 alt="プロフィール画像"
                 fill
                 className="rounded-full border cursor-pointer object-cover"
                 onClick={handleImageClick}
+                placeholder="blur"
+                blurDataURL={blurImage}
             />
             <input
                 type="file"
