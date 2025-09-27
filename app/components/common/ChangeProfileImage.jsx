@@ -6,8 +6,9 @@ import { useAuth } from "@/app/context/AuthContext";
 
 export default function ChangeProfileImage({ userId }) {
     const [imageUrl, setImageUrl] = useState(null);
+    const [loadingImage, setLoadingImage] = useState(true);
     const fileInputRef = useRef(null);
-    const { token, loading } = useAuth();
+    const { token } = useAuth();
 
     const defaultImage = '/images/profile/profile.jpg';
     const blurImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHUlEQVQYV2NkYGBg+M+ABMRg0CDAwMDwPAAADDAAGs0xwVAAAAAElFTkSuQmCC';
@@ -34,15 +35,16 @@ export default function ChangeProfileImage({ userId }) {
                         ? (data.imageUrl.startsWith('http') ? data.imageUrl : `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`)
                         : '/images/profile/profile.jpg';
                     setImageUrl(fullImageUrl);
-                } else {
-                    setImageUrl(defaultImage);
                 }
             })
             .catch(err => {
                 console.error(err);
                 setImageUrl(defaultImage);
+            })
+            .finally (() => {
+                setImageUrl(false);
             });
-    }, [userId]);
+    }, [userId, token]);
     
     const handleImageChange = async (e) => {
         const file = e.target.files[0];
@@ -83,22 +85,33 @@ export default function ChangeProfileImage({ userId }) {
 
     return (
         <div>
-            <Image
-                src={imageUrl || defaultImage}
-                alt="プロフィール画像"
-                fill
-                className="rounded-full border cursor-pointer object-cover"
-                onClick={handleImageClick}
-                placeholder="blur"
-                blurDataURL={blurImage}
-            />
-            <input
-                type="file"
-                accept="image/*"
-                ref={fileInputRef}
-                onChange={handleImageChange}
-                className="hidden"
-            />
+            {loadingImage ? (
+                <Image
+                    src={blurImage}
+                    alt="プロフィール画像読み込み中"
+                    fill
+                    className="rounded-full border object-cover"
+                    placeholder="blur"
+                    blurDataURL={blurImage}
+                />
+            ) : (
+                <Image
+                    src={imageUrl || defaultImage}
+                    alt="プロフィール画像"
+                    fill
+                    className="rounded-full border cursor-pointer object-cover"
+                    onClick={handleImageClick}
+                    placeholder="blur"
+                    blurDataURL={blurImage}
+                />
+            )}
+                <input
+                    type="file"
+                    accept="image/*"
+                    ref={fileInputRef}
+                    onChange={handleImageChange}
+                    className="hidden"
+                />
         </div>
     )
 }
