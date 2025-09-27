@@ -99,7 +99,7 @@ export default function ChangeProfileImage({ userId }) {
                     src={imageUrl || defaultImage}
                     alt="プロフィール画像"
                     fill
-                    className="rounded-full border cursor-pointer object-cover bg-gray-200"
+                    className="rounded-full border cursor-pointer object-cover"
                     onClick={handleImageClick}
                     placeholder="blur"
                     blurDataURL={blurImage}
