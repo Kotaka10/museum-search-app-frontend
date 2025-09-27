@@ -11,7 +11,7 @@ export default function ChangeProfileImage({ userId }) {
     const { token } = useAuth();
 
     const defaultImage = '/images/profile/profile.jpg';
-    const blurImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHUlEQVQYV2NkYGBg+M+ABMRg0CDAwMDwPAAADDAAGs0xwVAAAAAElFTkSuQmCC';
+    const blurImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAF0lEQVQYV2NkYGBg+M+ABMRg0CDAwMDAwAAgwAAbBLCkAAAAABJRU5ErkJggg==';
 
     const handleImageClick = () => {
         fileInputRef.current.click();
@@ -99,7 +99,7 @@ export default function ChangeProfileImage({ userId }) {
                     src={imageUrl || defaultImage}
                     alt="プロフィール画像"
                     fill
-                    className="rounded-full border cursor-pointer object-cover"
+                    className="rounded-full border cursor-pointer object-cover bg-gray-200"
                     onClick={handleImageClick}
                     placeholder="blur"
                     blurDataURL={blurImage}
