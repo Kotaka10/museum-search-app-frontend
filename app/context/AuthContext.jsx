@@ -60,6 +60,7 @@ export function AuthProvider({ children }) {
     const login = (token, userData) => {
         setToken(token);
         localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(userData));
         setUser(userData);
         refresh();
     };
@@ -68,6 +69,7 @@ export function AuthProvider({ children }) {
         setToken(null);
         localStorage.removeItem("token");
         setUser(null);
+        localStorage.removeItem("user");
     };
 
     return (
