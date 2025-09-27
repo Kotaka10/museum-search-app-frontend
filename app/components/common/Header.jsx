@@ -9,7 +9,7 @@ import Link from 'next/link';
 export default function Header() {
     const { user, isLoading, logout } = useAuth();
 
-    if (isLoading || (!user && typeof window !== "undefined")) {
+    if (isLoading) {
         return (
             <header className="flex items-center justify-between p-2 bg-white shadow">
                 <div className="animate-pulse bg-gray-300 h-6 w-40 rounded mb-2"></div>
