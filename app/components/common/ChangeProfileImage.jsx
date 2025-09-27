@@ -42,7 +42,7 @@ export default function ChangeProfileImage({ userId }) {
                 setImageUrl(defaultImage);
             })
             .finally (() => {
-                setImageUrl(false);
+                setLoadingImage(false);
             });
     }, [userId, token]);
     
