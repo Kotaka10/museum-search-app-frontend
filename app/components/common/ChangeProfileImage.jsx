@@ -5,9 +5,12 @@ import Image from "next/image";
 import { useAuth } from "@/app/context/AuthContext";
 
 export default function ChangeProfileImage({ userId }) {
-    const [imageUrl, setImageUrl] = useState('/images/profile/profile.jpg');
+    const [imageUrl, setImageUrl] = useState(null);
     const fileInputRef = useRef(null);
     const { token, loading } = useAuth();
+
+    const defaultImage = '/images/profile/profile.jpg';
+    const blurImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHUlEQVQYV2NkYGBg+M+ABMRg0CDAwMDwPAAADDAAGs0xwVAAAAAElFTkSuQmCC';
 
     const handleImageClick = () => {
         fileInputRef.current.click();
@@ -31,10 +34,13 @@ export default function ChangeProfileImage({ userId }) {
                         ? (data.imageUrl.startsWith('http') ? data.imageUrl : `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`)
                         : '/images/profile/profile.jpg';
                     setImageUrl(fullImageUrl);
+                } else {
+                    setImageUrl(defaultImage);
                 }
             })
             .catch(err => {
                 console.error(err);
+                setImageUrl(defaultImage);
             });
     }, [userId]);
     
@@ -74,9 +80,6 @@ export default function ChangeProfileImage({ userId }) {
             alert('プロフィール画像のアップロードに失敗しました: ' + err.message);
         }
     };
-
-    const defaultImage = '/images/profile/profile.jpg';
-    const blurImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHUlEQVQYV2NkYGBg+M+ABMRg0CDAwMDwPAAADDAAGs0xwVAAAAAElFTkSuQmCC';
 
     return (
         <div>
