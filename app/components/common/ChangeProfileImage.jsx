@@ -84,27 +84,16 @@ export default function ChangeProfileImage({ userId }) {
     };
 
     return (
-        <div>
-            {loadingImage ? (
-                <Image
-                    src={blurImage}
-                    alt="プロフィール画像読み込み中"
-                    fill
-                    className="rounded-full border object-cover"
-                    placeholder="blur"
-                    blurDataURL={blurImage}
-                />
-            ) : (
-                <Image
-                    src={imageUrl || defaultImage}
-                    alt="プロフィール画像"
-                    fill
-                    className="rounded-full border cursor-pointer object-cover"
-                    onClick={handleImageClick}
-                    placeholder="blur"
-                    blurDataURL={blurImage}
-                />
-            )}
+        <div className="relative w-full h-full rounded-full overflow-hidden border bg-gray-200 cursor-pointer">
+            <Image
+                src={imageUrl || defaultImage}
+                alt="プロフィール画像"
+                fill
+                className="object-cover"
+                onClick={handleImageClick}
+                placeholder="blur"
+                blurDataURL={blurImage}
+            />
                 <input
                     type="file"
                     accept="image/*"
