@@ -11,11 +11,15 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         const savedToken = localStorage.getItem("token");
+        const savedUser = localStorage.getItem("user");
+
         if (savedToken) {
             setToken(savedToken);
-        } else {
-            setIsLoading(false);
+            if (savedUser) {
+                setUser(JSON.parse(savedUser));
+            }
         }
+        setIsLoading(false);
     }, []);
 
     const refresh = useCallback(async () => {
