@@ -4,7 +4,6 @@ import { useAuth } from "@/app/context/AuthContext";
 import { useEffect, useState } from "react";
 
 export default function DeleteMuseum({ id }) {
-    const [museums, setMuseums] = useState([]);
     const { token } = useAuth();
 
     const handleDelete = async (id) => {
@@ -19,7 +18,6 @@ export default function DeleteMuseum({ id }) {
         });
 
         if (res.status === 204) {
-            setMuseums((prev) => prev.filter((museum) => museum.id !== id));
             alert('削除に成功しました');
         } else {
             const error = await res.text();

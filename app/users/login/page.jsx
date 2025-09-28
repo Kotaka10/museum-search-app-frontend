@@ -23,6 +23,7 @@ export default function LoginPage() {
             
             if (!res.ok) {
                 const errorText = await res.text();
+                aleert(errorText);
                 throw new Error(errorText);
             }
 
