@@ -4,17 +4,21 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaHistory } from 'react-icons/fa';
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function ViewedMuseums() {
     const [history, setHistory] = useState([]);
     const [error, setError] = useState('');
+    const { token } = useAuth();
 
     useEffect(() => {
         const fetchViewedHistory = async () => {
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/viewed`, {
                     method: 'GET',
-                    credentials: 'include',
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
                 });
 
                 if (!res.ok) {

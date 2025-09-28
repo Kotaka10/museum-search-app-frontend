@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect } from "react";
-import Cookies from "js-cookie";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function ViewedLogger({ museum }) {
+    const { token } = useAuth();
+
     useEffect(() => {
         const saveViewedHistrory = async () => {
 
@@ -12,9 +14,9 @@ export default function ViewedLogger({ museum }) {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${token}`
                     },
                     body: JSON.stringify({ museumId: museum.id }),
-                    credentials: 'include',
                 });
 
                 if (!res.ok) {
