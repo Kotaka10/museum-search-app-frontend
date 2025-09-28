@@ -35,7 +35,8 @@ export default function LoginPage() {
                 alert("トークンまたはユーザーデータが返されませんでした");
             }
         } catch (err) {
-            alert("ログインに失敗しました",  + err.message);
+            alert("ログインに失敗しました: ",  + err.message);
+            console.error(err);
         }
     };
 
