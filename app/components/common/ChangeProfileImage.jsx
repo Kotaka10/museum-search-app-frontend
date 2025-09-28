@@ -30,10 +30,12 @@ export default function ChangeProfileImage({ userId }) {
             })
             .then(data => {
                 if (data.imageUrl) {
-                    const fullImageUrl = data.imageUrl 
-                        ? (data.imageUrl.startsWith('http') ? data.imageUrl : `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`)
-                        : '/images/profile/profile.jpg';
+                    const fullImageUrl = data.imageUrl.startsWith('http')
+                        ? data.imageUrl
+                        : `${process.env.NEXT_PUBLIC_API_URL}${data.imageUrl}`;
                     setImageUrl(fullImageUrl);
+                } else {
+                    setImageUrl(defaultImage);
                 }
             })
             .catch(err => {
@@ -83,7 +85,7 @@ export default function ChangeProfileImage({ userId }) {
         <div className="bg-gray-200 cursor-pointer">
             {imageUrl && (
                 <Image
-                    src={defaultImage || imageUrl}
+                    src={imageUrl || defaultImage}
                     alt="プロフィール画像"
                     fill
                     className="object-cover rounded-full"
