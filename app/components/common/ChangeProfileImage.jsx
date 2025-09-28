@@ -84,7 +84,7 @@ export default function ChangeProfileImage({ userId }) {
     };
 
     return (
-        <div className="relative w-full h-full rounded-full overflow-hidden border bg-gray-200 cursor-pointer">
+        <div className="relative rounded-full overflow-hidden border bg-gray-200 cursor-pointer">
             {imageUrl && (
                 <Image
                     src={imageUrl || defaultImage}
