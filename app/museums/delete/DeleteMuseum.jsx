@@ -3,24 +3,9 @@
 import { useAuth } from "@/app/context/AuthContext";
 import { useEffect, useState } from "react";
 
-export default function DeleteMuseum() {
+export default function DeleteMuseum( id ) {
     const [museums, setMuseums] = useState([]);
     const { token } = useAuth();
-
-    useEffect(() => {
-        const fetchMuseums = async () => {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/all`);
-
-            if (res.ok) {
-                const data = await res.json();
-                setMuseums(data);
-            } else {
-                alert('美術館一覧の取得に失敗しました');
-            }
-        };
-
-        fetchMuseums();
-    }, []);
 
     const handleDelete = async (id) => {
         const confirmed = confirm('本当にこの美術館を削除しますか？');
@@ -44,20 +29,12 @@ export default function DeleteMuseum() {
 
     return (
         <>
-            {museums.length !== 0 && (
-                <div>
-                    {museums.map((museum) => (
-                        <div key={museum.id}>
-                            <button
-                                onClick={() => handleDelete(museum.id)}
-                                className="bg-red-500 text-white p-2 rounded hover:bg-red-600"
-                            >
-                                削除
-                            </button>
-                        </div>
-                    ))}
-                </div>
-            )}
+            <button
+                onClick={() => handleDelete(id)}
+                className="bg-red-500 text-white p-2 rounded hover:bg-red-600"
+            >
+                削除
+            </button>
         </>
     );
 }

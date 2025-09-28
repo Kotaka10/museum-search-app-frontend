@@ -41,7 +41,7 @@ export default function RegisterMuseumsList() {
             {museums.length === 0 ? (
                 <p className="text-gray-500">登録された美術館はありません</p>
             ) : (
-                <ul className="space-y-2">
+                <ul className="flex justify-between">
                     {museums.map((museum) => (
                         <li key={museum.id}>
                             <Link
@@ -54,11 +54,11 @@ export default function RegisterMuseumsList() {
                                     museum.status === "REJECTED" && "非承認"
                                 }
                             </Link>
+                            <DeleteMuseum id={museum.id}/>
                         </li>
                     ))}
                 </ul>
             )}
-            <DeleteMuseum />
         </div>
     );
 }
