@@ -3,7 +3,7 @@
 import { useAuth } from "@/app/context/AuthContext";
 import { useEffect, useState } from "react";
 
-export default function DeleteMuseum( id ) {
+export default function DeleteMuseum({ id }) {
     const [museums, setMuseums] = useState([]);
     const { token } = useAuth();
 
