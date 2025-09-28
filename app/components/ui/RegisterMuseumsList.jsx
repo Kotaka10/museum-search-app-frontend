@@ -41,21 +41,23 @@ export default function RegisterMuseumsList() {
             {museums.length === 0 ? (
                 <p className="text-gray-500">登録された美術館はありません</p>
             ) : (
-                <ul className="space-x-8">
+                <ul>
                     {museums.map((museum) => (
-                        <li key={museum.id}>
-                            <Link
-                                href={`/museums/${museum.id}/edit`}
-                                className="text-orange-600 hover:underline"
-                            >
-                                {museum.name} {
-                                    museum.status === "APPROVED" && "承認済み" ||
-                                    museum.status === "PENDING" && "承認待ち" ||
-                                    museum.status === "REJECTED" && "非承認"
-                                }
-                            </Link>
+                        <div className="felx justify-between">
+                            <li key={museum.id}>
+                                <Link
+                                    href={`/museums/${museum.id}/edit`}
+                                    className="text-orange-600 hover:underline"
+                                >
+                                    {museum.name} {
+                                        museum.status === "APPROVED" && "承認済み" ||
+                                        museum.status === "PENDING" && "承認待ち" ||
+                                        museum.status === "REJECTED" && "非承認"
+                                    }
+                                </Link>
+                            </li>
                             <DeleteMuseum id={museum.id}/>
-                        </li>
+                        </div>
                     ))}
                 </ul>
             )}
