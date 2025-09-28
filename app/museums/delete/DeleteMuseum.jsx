@@ -34,8 +34,8 @@ export default function DeleteMuseum() {
         });
 
         if (res.status === 204) {
-            alert('削除に失敗しました');
             setMuseums((prev) => prev.filter((museum) => museum.id !== id));
+            alert('削除に成功しました');
         } else {
             const error = await res.text();
             alert('削除に失敗しました: ' + error);
@@ -46,7 +46,7 @@ export default function DeleteMuseum() {
         <>
             {museums.length !== 0 && (
                 <div>
-                    {museums.map((museum) => {
+                    {museums.map((museum) => (
                         <div key={museum.id}>
                             <button
                                 onClick={() => handleDelete(museum.id)}
@@ -55,7 +55,7 @@ export default function DeleteMuseum() {
                                 削除
                             </button>
                         </div>
-                    })}
+                    ))}
                 </div>
             )}
         </>
