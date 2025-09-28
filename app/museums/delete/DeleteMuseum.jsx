@@ -9,11 +9,7 @@ export default function DeleteMuseum() {
 
     useEffect(() => {
         const fetchMuseums = async () => {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/all`, {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                },
-            });
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/museums/all`);
 
             if (res.ok) {
                 const data = await res.json();
