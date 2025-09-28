@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function CommentForm({ museumId, onCommentAdded, currentUser }) {
     const [content, setContent] = useState('');
     const [loading, setLoading] = useState(false);
+    const { token } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
