@@ -84,13 +84,13 @@ export default function ChangeProfileImage({ userId }) {
     };
 
     return (
-        <div className="rounded-full overflow-hidden border bg-gray-200 cursor-pointer">
+        <div className="overflow-hidden border bg-gray-200 cursor-pointer">
             {imageUrl && (
                 <Image
                     src={imageUrl || defaultImage}
                     alt="プロフィール画像"
                     fill
-                    className="object-cover"
+                    className="object-cover rounded-full"
                     onClick={handleImageClick}
                     placeholder="blur"
                     blurDataURL={blurImage}
