@@ -41,7 +41,7 @@ export default function RegisterMuseumsList() {
             {museums.length === 0 ? (
                 <p className="text-gray-500">登録された美術館はありません</p>
             ) : (
-                <ul className="flex justify-between">
+                <ul className="space-x-8">
                     {museums.map((museum) => (
                         <li key={museum.id}>
                             <Link
