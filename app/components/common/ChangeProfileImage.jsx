@@ -84,7 +84,7 @@ export default function ChangeProfileImage({ userId }) {
     };
 
     return (
-        <div className="overflow-hidden bg-gray-200 cursor-pointer">
+        <div className="bg-gray-200 cursor-pointer">
             {imageUrl && (
                 <Image
                     src={imageUrl || defaultImage}
