@@ -43,7 +43,7 @@ export default function RegisterMuseumsList() {
             ) : (
                 <ul>
                     {museums.map((museum) => (
-                        <div className="flex justify-between">
+                        <div className="flex justify-between items-center">
                             <li key={museum.id}>
                                 <Link
                                     href={`/museums/${museum.id}/edit`}
