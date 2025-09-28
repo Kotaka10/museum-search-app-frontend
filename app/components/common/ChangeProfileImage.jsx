@@ -6,7 +6,6 @@ import { useAuth } from "@/app/context/AuthContext";
 
 export default function ChangeProfileImage({ userId }) {
     const [imageUrl, setImageUrl] = useState(null);
-    const [loadingImage, setLoadingImage] = useState(true);
     const fileInputRef = useRef(null);
     const { token } = useAuth();
 
@@ -41,9 +40,6 @@ export default function ChangeProfileImage({ userId }) {
                 console.error(err);
                 setImageUrl(defaultImage);
             })
-            .finally (() => {
-                setLoadingImage(false);
-            });
     }, [userId, token]);
     
     const handleImageChange = async (e) => {
@@ -87,7 +83,7 @@ export default function ChangeProfileImage({ userId }) {
         <div className="bg-gray-200 cursor-pointer">
             {imageUrl && (
                 <Image
-                    src={imageUrl || defaultImage}
+                    src={defaultImage || imageUrl}
                     alt="プロフィール画像"
                     fill
                     className="object-cover rounded-full"
