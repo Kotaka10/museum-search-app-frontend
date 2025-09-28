@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  source: '/(.*).(jpg|jpeg|png|gif|svg|webp)',
+  headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
   images: {
     remotePatterns: [
       {
